@@ -1,12 +1,13 @@
 <template>
   <!-- breadcrum -->
-  <div class="py-4 container flex gap-3 items-center">
+  <!-- <div class="py-4 container flex gap-3 items-center">
     <a href="index.html" class="text-primary text-base">
       <i class="fas fa-home"></i>
     </a>
     <span class="text-sm text-gray-400"><i class="fas fa-chevron-right"></i></span>
     <p class="text-gray-600 font-medium uppercase">Shopping Cart</p>
-  </div>
+  </div> -->
+  <Breadcrumbs :breadcrumbs="breadcrumbs" />
   <!-- breadcrum end -->
 
   <!-- cart wrapper -->
@@ -30,7 +31,7 @@
           :key="item.id"
         >
           <!-- cart image -->
-          <div class="w-32 flex-shrink-0 ">
+          <div class="w-32 flex-shrink-0">
             <img :src="item?.thumbnail" class="w-full max-h-[100px] object-cover" />
           </div>
           <!-- cart image end -->
@@ -69,7 +70,11 @@
           <!-- cart quantity end -->
           <div class="ml-auto md:ml-0">
             <p class="text-primary text-lg font-semibold">
-              ${{ Number(Number((item?.price - (item?.price * item?.discount) / 100).toFixed(1)) * item?.targetQuantity).toFixed(1) }}
+              ${{
+                Number(
+                  Number((item?.price - (item?.price * item?.discount) / 100).toFixed(1)) * item?.targetQuantity
+                ).toFixed(1)
+              }}
             </p>
           </div>
           <div class="text-gray-600 hover:text-primary cursor-pointer" @click="removeItem(item?.id)">
@@ -78,9 +83,7 @@
         </div>
         <!-- single cart end -->
       </div>
-      <div v-else>
-        No item in cart
-      </div>
+      <div v-else>No item in cart</div>
       <!-- shipping carts end -->
     </div>
     <!-- product cart end -->
@@ -140,6 +143,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useCart } from '@/store/cartStore'
+import Breadcrumbs from '@/components/atoms/Breadcrumb/Breadcrumb.vue'
+import { h } from 'vue'
+
+const breadcrumbs = [
+  {
+    url: '/',
+    label: 'Homepage',
+    prefixIcon: () => h('i', { class: 'fas fa-home mr-2' }, [])
+  },
+  {
+    url: '/cart',
+    label: 'Shoping cart'
+  }
+]
 
 const cartStore = useCart()
 const cart = computed(() => cartStore.getCart)

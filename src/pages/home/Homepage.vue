@@ -68,25 +68,23 @@
       </div>
       <!-- sorting end -->
       <!-- product wrapper -->
-     <div v-if="cardList?.length">
-         <div v-if="targetDisplayType === 'col'" class="grid lg:grid-cols-2 xl:grid-cols-4 sm:grid-cols-2 gap-6">
-        <Card v-for="card in cardList" :key="card.id" v-bind="card" />
+      <div v-if="cardList?.length">
+        <div v-if="targetDisplayType === 'col'" class="grid lg:grid-cols-2 xl:grid-cols-4 sm:grid-cols-2 gap-6">
+          <Card v-for="card in cardList" :key="card.id" v-bind="card" />
+        </div>
+        <div v-if="targetDisplayType === 'row'" class="col-span-9 mt-6 lg:mt-0 space-y-4">
+          <RowCard
+            v-for="card in cardList"
+            :key="card.id"
+            v-bind="card"
+            v-bind:disableDeleteButton="true"
+            v-bind:showAvailability="false"
+            v-bind:showRating="true"
+            v-bind:showRemoveFromWishlist="true"
+          />
+        </div>
       </div>
-      <div v-if="targetDisplayType === 'row'" class="col-span-9 mt-6 lg:mt-0 space-y-4">
-        <RowCard
-          v-for="card in cardList"
-          :key="card.id"
-          v-bind="card"
-          v-bind:disableDeleteButton="true"
-          v-bind:showAvailability="false"
-          v-bind:showRating="true"
-          v-bind:showRemoveFromWishlist="true"
-        />
-      </div>
-     </div>
-     <div v-else>
-        Loading products...
-     </div>
+      <div v-else>Loading products...</div>
       <!-- product wrapper end -->
     </div>
     <!-- products end -->
@@ -119,9 +117,7 @@
         :slug="category.slug"
       />
     </div>
-    <div v-else>
-      Loading categories...
-    </div>
+    <div v-else>Loading categories...</div>
   </div>
   <!-- categories end -->
 
@@ -157,9 +153,7 @@
     <div v-if="recommendProductList.length" class="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
       <Card v-for="card in recommendProductList" :key="card.id" v-bind="card" />
     </div>
-    <div v-else>
-      Loading recommend products...
-    </div>
+    <div v-else>Loading recommend products...</div>
     <!-- product wrapper end -->
   </div>
   <!-- recomended for you end -->
@@ -167,8 +161,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import Card from '@/components/molecules/Card.vue'
-import RowCard from '@/components/molecules/RowCard.vue'
+import Card from '@/components/molecules/Card/Card.vue'
+import RowCard from '@/components/molecules/RowCard/RowCard.vue'
 import Category from './components/Category.vue'
 import Feature from './components/Feature.vue'
 import banner from '@/assets/images/banner-bg.jpg'
@@ -243,6 +237,5 @@ onMounted(async () => {
   } catch (error) {
     console.error('Error fetching data:', error)
   }
-
 })
 </script>

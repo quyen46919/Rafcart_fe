@@ -30,8 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import ProfileMenu from '@/components/molecules/ProfileMenu.vue'
-import RowCard from '@/components/molecules/RowCard.vue'
+import Card from '@/components/molecules/ProfileMenu/ProfileMenu.vue'
+import RowCard from '@/components/molecules/RowCard/RowCard.vue'
 import { useWishList } from '@/store/wishlistStore'
 import { computed } from 'vue'
 

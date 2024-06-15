@@ -71,7 +71,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import CardProps from '@/interfaces/card'
-import Rating from '@/components/atoms/Rating.vue'
+import Rating from '@/components/atoms/Rating/Rating.vue'
 import { useCart } from '@/store/cartStore'
 import { useWishList } from '@/store/wishlistStore'
 

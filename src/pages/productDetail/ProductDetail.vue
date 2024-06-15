@@ -325,8 +325,8 @@
 
 <script setup lang="ts">
 import CardProps from '@/interfaces/card'
-import Rating from '@/components/atoms/Rating.vue'
-import Card from '@/components/molecules/Card.vue'
+import Rating from '@/components/atoms/Rating/Rating.vue'
+import Card from '@/components/molecules/Card/Card.vue'
 import { computed, onMounted, reactive, ref, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useWishList } from '@/store/wishlistStore'
@@ -368,7 +368,7 @@ const averageRating = computed(() => {
   if (!productDetail.value?.comments) return
   return Number(
     productDetail.value.comments?.map((item) => item.rating)?.reduce((a, b) => a + b, 0) /
-    productDetail.value.comments?.length
+      productDetail.value.comments?.length
   )
 })
 

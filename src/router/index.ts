@@ -14,11 +14,10 @@ import ManageAddress from '@/pages/profile/ManageAddress.vue'
 import Account from '@/pages/profile/Account.vue'
 import Filter from '@/pages/filter/Filter.vue'
 import PageNotFound from '@/pages/pageNotFound/PageNotFound.vue'
-import { useAuth } from '@/store/authStore'
 import { isEmpty } from 'lodash'
 
 const router = createRouter({
-  history: createWebHistory(''),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',

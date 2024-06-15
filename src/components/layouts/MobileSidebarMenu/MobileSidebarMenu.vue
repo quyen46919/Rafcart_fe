@@ -1,6 +1,6 @@
 <template>
   <!-- mobile sidebar menu -->
-  <div class="fixed left-0 top-0 w-full h-full z-50 bg-black bg-opacity-30 shadow hidden" id="mobileMenu">
+  <div class="fixed left-0 top-0 w-full h-full z-50 bg-black bg-opacity-30 shadow" id="mobileMenu">
     <div class="absolute left-0 top-0 w-72 h-full z-50 bg-white shadow">
       <div id="closeMenu" class="text-gray-400 hover:text-primary text-lg absolute right-3 top-3 cursor-pointer">
         <i class="fas fa-times"></i>

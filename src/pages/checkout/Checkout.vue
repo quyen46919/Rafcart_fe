@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import Loader from '@/components/atoms/Loader.vue'
+import Loader from '@/components/atoms/Loader/Loader.vue'
 import { useCart } from '@/store/cartStore'
 import OrderAPI from '@/api/order.api'
 import { useAuth } from '@/store/authStore'

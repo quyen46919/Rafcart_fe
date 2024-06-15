@@ -281,8 +281,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import Card from '@/components/molecules/Card.vue'
-import RowCard from '@/components/molecules/RowCard.vue'
+import Card from '@/components/molecules/Card/Card.vue'
+import RowCard from '@/components/molecules/RowCard/RowCard.vue'
 import ProductAPI from '@/api/product.api'
 import CardProps from '@/interfaces/card'
 

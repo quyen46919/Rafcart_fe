@@ -1,6 +1,6 @@
 <template>
   <!-- navbar -->
-  <nav class="bg-gray-800 hidden lg:block">
+  <nav class="bg-gray-800 lg:block">
     <div class="container">
       <div class="flex">
         <!-- all category -->

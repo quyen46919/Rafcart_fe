@@ -64,6 +64,6 @@
 </template>
 
 <script setup lang="ts">
-import ProfileMenu from '@/components/molecules/ProfileMenu.vue'
+import Card from '@/components/molecules/ProfileMenu/ProfileMenu.vue'
 const user = JSON.parse(localStorage.getItem('user') || '')
 </script>
