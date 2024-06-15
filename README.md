@@ -1,21 +1,17 @@
-# Vue 3 + Tailwindcss + TypeScript + Vite + Pinia
+# RAFCART - VUE3 ECOMMERCE PROJECT
 
-This is an Eccomerce UI template website built by VueJS; it does not include a form validation or API module.
+This is an Eccomerce website built by VueJS <br/>
+Technology: Vue 3 + TypeScript + Vite + Tailwindcss + Pinia
 
-Enable UIs:
-- Login
-- Logout
-- Shopping cart
-- Wishlist
-- Filter product
-- Checkout
-- Profile
-- Page Not Found
+# How to run project
 
-Enable features:
-- Shopping cart
-- Wishlist
+`nvm use 18.19.0` <br/>
+`npm run dev` <br/>
+
+## Run storybook
+
+`npm run storybook` <br/>
 
 ## Recommended enviroment
 
-node version 18.10.0
+node version 18.19.0
