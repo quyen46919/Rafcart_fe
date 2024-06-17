@@ -59,9 +59,11 @@ const buttonClass = computed(() => {
 
 const buttonStyle = computed(() => {
   const style: Record<string, string> = {}
-  if (props.variant === 'contained' || props.variant === 'icon') {
+  if (props.variant === 'contained' ) {
     style.backgroundColor = props.color || '#f44336'
     style.color = '#fff'
+  }else if( props.variant === 'icon'){
+     style.color = props.color || '#f44336'
   } else if (props.variant === 'outlined' || props.variant === 'text') {
     style.color = props.color || '#f44336'
     style.borderColor = props.color || '#f44336'
@@ -101,6 +103,9 @@ const buttonStyle = computed(() => {
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
+  border-width: 1px;
+  background: none;
+  border: 1px solid;
 }
 
 .btn-circle {

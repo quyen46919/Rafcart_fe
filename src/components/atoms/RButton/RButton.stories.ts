@@ -28,7 +28,7 @@ export const Contained: Story = {
     content: 'Add to Cart',
     prefixIcon: 'fas fa-shopping-cart',
     onClick: () => { console.log('Add to Cart clicked') },
-    color: '#007bff', // Màu tùy chỉnh
+    color: '#f44336', // Màu tùy chỉnh
   },
 };
 
@@ -38,7 +38,7 @@ export const Outlined: Story = {
     content: 'Wishlist',
     prefixIcon: 'fas fa-heart',
     onClick: () => { console.log('Wishlist clicked') },
-    color: '#6c757d', // Màu tùy chỉnh
+    color: '#e01750', // Màu tùy chỉnh
   },
 };
 
