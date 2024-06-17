@@ -45,8 +45,14 @@ button:disabled {
   cursor: not-allowed;
   background-color: #e0e0e0;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 input[type="number"] {
-  width: 50px;
+  width: 40px;
   padding: 5px;
   text-align: center;
   border: 1px solid #ccc;
