@@ -60,12 +60,12 @@ export const Primary: Story = {
       },
       {
         label: "white",
-        value: "white",
+        value: "#FF0000",
         variant: "color",
       },
       {
         label: "black",
-        value: "[#FD3D57]",
+        value: "white",
         variant: "color",
       },
     ],

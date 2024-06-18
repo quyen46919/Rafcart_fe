@@ -12,7 +12,7 @@
       <div
         v-for="(item, index) in props.sizeList"
         :key="index"
-        :class="{ 'size-selected': value == item.value }"
+        :class="{ 'size-selected': (value = item.value) }"
       >
         <input
           type="radio"
@@ -44,7 +44,9 @@
       <div
         v-for="(item, index) in props.colorList"
         :key="index"
-        class="color-selected flex flex-col items-center justify-center gap-2"
+        :class="{
+          'color-selected': (value = item.value),
+        }"
       >
         <input
           type="radio"
@@ -56,14 +58,33 @@
         />
         <label
           :for="'color-' + item.value"
-          :class="
-            'color-label text-xs border border-gray-400 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600 font-bold ' +
-            'bg-' +
-            item.value
-          "
+          :style="'background-color:' + value"
+          class="color-label text-xs border border-gray-400 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600 font-bold"
           @click="handleChangeColor(item.value)"
         >
         </label>
+      </div>
+    </div>
+  </div>
+  <!--Circle radio-->
+  <div class="flex items-start flex-col p-4">
+    <div class="flex flex-col items-start justify-start gap-3 mt-2">
+      <div v-for="(item, index) in props.colorList" :key="index">
+        <div class="flex flex-row items-center justify-center gap-3">
+          <input
+            type="radio"
+            name="circle"
+            :value="targetColor"
+            :id="'circle-' + item.value"
+            v-model="value"
+          />
+          <label
+            :for="'circle-' + item.value"
+            class="circle-label text-xs flex cursor-pointer shadow-sm text-gray-600 font-bold"
+          >
+            {{ item.label }}
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -75,6 +96,7 @@ import { ref, withDefaults, defineProps } from "vue";
 import type { VNode } from "vue";
 
 interface RadioProps {
+  label: string | Vnode;
   sizeList: {
     label: string;
     value: string;
@@ -96,7 +118,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   asterisk: true,
 });
 
-const targetSize = ref<string>("");
+const targetSize = ref<string>("xs");
 const targetColor = ref<string>("");
 
 const handleChangeSize = (size: string) => {
@@ -109,11 +131,11 @@ const handleChangeColor = (color: string) => {
 </script>
 
 <style scoped>
-.size-selected .size-label {
+.size-selected input:checked + .size-label {
   background-color: rgb(254, 61, 87);
   color: rgb(255, 255, 255);
 }
-.color-selected .color-label {
+.color-selected input:checked + .color-label {
   border: 2px solid rgb(254, 61, 87);
 }
 </style>
