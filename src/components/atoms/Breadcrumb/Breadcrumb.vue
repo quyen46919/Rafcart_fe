@@ -1,14 +1,30 @@
 <template>
   <!-- breadcrum -->
-  <div class="container flex justify-start mt-2">
+  <div class="container flex flex-wrap justify-center mt-2">
     <div v-for="(link, index) in props.breadcrumbs" :key="link.url" class="flex items-center">
-      <RouterLink :to="link.url" class="text-primary text-base cursor-pointer">
+      <span
+        v-if="link.url === currentUrl"
+        class="text-base cursor-default font-medium mr-2"
+        :class="props?.mode === 'dark' ? 'text-gray-600' : 'text-white'"
+      >
         <span v-if="link.prefixIcon">
           <component :is="link.prefixIcon"></component>
         </span>
-        <span class="text-gray-600 font-medium mr-2">{{ link.label }}</span>
+        {{ link.label }}
+      </span>
+      <RouterLink v-else :to="link.url" class="text-primary text-base cursor-pointer">
+        <span v-if="link.prefixIcon">
+          <component :is="link.prefixIcon"></component>
+        </span>
+        <span class="font-medium mx-2">
+          {{ link.label }}
+        </span>
       </RouterLink>
-      <span v-if="index !== props.breadcrumbs.length - 1" class="text-sm text-gray-400">
+      <span
+        v-if="index !== props.breadcrumbs.length - 1"
+        class="text-s"
+        :class="props?.mode === 'dark' ? 'text-gray-400' : 'text-white'"
+      >
         <i class="fa-solid fa-chevron-right mr-2"></i>
       </span>
     </div>
@@ -17,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import type { VNode } from 'vue'
+import { VNode, onMounted, ref } from 'vue'
 
 interface BreadcrumbProps {
   breadcrumbs: {
@@ -25,9 +41,17 @@ interface BreadcrumbProps {
     label: string
     prefixIcon?: VNode
   }[]
+  mode: 'light' | 'dark'
 }
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
-  breadcrumbs: []
+  breadcrumbs: [],
+  mode: 'dark'
 })
-console.log('props in ', props?.breadcrumbs?.[0])
+
+const currentUrl = ref('')
+
+onMounted(() => {
+  console.log(props?.breadcrumbs)
+  currentUrl.value = props?.breadcrumbs[props?.breadcrumbs.length - 1].url
+})
 </script>
