@@ -1,16 +1,16 @@
 <template>
   <button
-    :class="[buttonClass, { 'btn-circle': circle }]"
-    :style="buttonStyle"
+    :class="[buttonClass, { 'rounded-full': circle }]"
     :disabled="isDisabled || isLoading"
     @click="onClick"
+    class="flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
   >
     <template v-if="isLoading">
-      <i class="fas fa-spinner fa-spin"></i>
+      <Loader />
     </template>
     <template v-else>
       <i v-if="prefixIcon && variant !== 'icon'" :class="['icon', prefixIcon]"></i>
-      <span v-if="variant !== 'icon'" class="button-content">{{ content }}</span>
+      <span v-if="variant !== 'icon'" class="mx-1">{{ content }}</span>
       <i v-if="suffixIcon && variant !== 'icon'" :class="['icon', suffixIcon]"></i>
       <i v-if="variant === 'icon'" :class="['icon', prefixIcon]"></i>
     </template>
@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import Loader from '../Loader/Loader.vue'
 
 interface ButtonProps {
   variant: 'text' | 'contained' | 'outlined' | 'icon'
@@ -29,7 +30,6 @@ interface ButtonProps {
   onClick?: () => void
   isDisabled?: boolean
   isLoading?: boolean
-  color?: string // Nhận giá trị màu dưới dạng chuỗi
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -39,85 +39,36 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   circle: false,
   onClick: () => {},
   isDisabled: false,
-  isLoading: false,
-  color: '#f44336' // Màu mặc định
+  isLoading: false
 })
 
 const buttonClass = computed(() => {
-  const baseClasses = ['button']
-  if (props.variant === 'contained') {
-    baseClasses.push('btn-contained')
-  } else if (props.variant === 'outlined') {
-    baseClasses.push('btn-outlined')
-  } else if (props.variant === 'text') {
-    baseClasses.push('btn-text')
-  } else if (props.variant === 'icon') {
-    baseClasses.push('btn-icon')
+  const baseClasses = ['px-4', 'py-2', 'text-base', 'border', 'rounded', 'cursor-pointer']
+
+  switch (props.variant) {
+    case 'contained':
+      baseClasses.push('bg-blue-600', 'text-white')
+      break
+    case 'outlined':
+      baseClasses.push('bg-transparent', 'border-blue-600', 'text-blue-600')
+      break
+    case 'text':
+      baseClasses.push('bg-transparent', 'text-blue-600', 'border-none')
+      break
+    case 'icon':
+      baseClasses.push(
+        'flex',
+        'items-center',
+        'justify-center',
+        'w-10',
+        'h-10',
+        'border-solid',
+        'text-blue-600',
+        'rounded-full'
+      )
+      break
   }
+
   return baseClasses
 })
-
-const buttonStyle = computed(() => {
-  const style: Record<string, string> = {}
-  if (props.variant === 'contained' ) {
-    style.backgroundColor = props.color || '#f44336'
-    style.color = '#fff'
-  }else if( props.variant === 'icon'){
-     style.color = props.color || '#f44336'
-  } else if (props.variant === 'outlined' || props.variant === 'text') {
-    style.color = props.color || '#f44336'
-    style.borderColor = props.color || '#f44336'
-  }
-  return style
-})
 </script>
-
-<style scoped>
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.btn-contained {
-  color: #fff;
-}
-.btn-outlined {
-  border-width: 1px;
-  background: none;
-  border: 1px solid;
-}
-.btn-text {
-  background: none;
-}
-
-.btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border-width: 1px;
-  background: none;
-  border: 1px solid;
-}
-
-.btn-circle {
-  border-radius: 50%;
-}
-
-.button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.button-content {
-  margin: 0 0.4rem;
-}
-</style>
