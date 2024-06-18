@@ -1,9 +1,11 @@
 <template>
   <button
-    :class="[buttonClass, { 'rounded-full': circle }]"
+    :class="[computedClasses, { 'rounded-full': circle }]"
+    :style="buttonStyle"
     :disabled="isDisabled || isLoading"
-    @click="onClick"
-    class="flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+    @click="handleClick"
+    class="flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 text-base border rounded cursor-pointer"
+    ref="button"
   >
     <template v-if="isLoading">
       <Loader />
@@ -18,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import Loader from '../Loader/Loader.vue'
 
 interface ButtonProps {
@@ -37,38 +39,44 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   prefixIcon: '',
   suffixIcon: '',
   circle: false,
-  onClick: () => {},
+  onClick: undefined,
   isDisabled: false,
   isLoading: false
 })
+const emit = defineEmits(['click'])
 
-const buttonClass = computed(() => {
-  const baseClasses = ['px-4', 'py-2', 'text-base', 'border', 'rounded', 'cursor-pointer']
-
+const handleClick = () => {
+  if (!props.isDisabled && !props.isLoading) {
+    emit('click')
+  }
+}
+const computedClasses = computed(() => {
   switch (props.variant) {
     case 'contained':
-      baseClasses.push('bg-blue-600', 'text-white')
-      break
+      return 'bg-blue-600 text-white'
     case 'outlined':
-      baseClasses.push('bg-transparent', 'border-blue-600', 'text-blue-600')
-      break
+      return 'bg-transparent border-blue-600 text-blue-600'
     case 'text':
-      baseClasses.push('bg-transparent', 'text-blue-600', 'border-none')
-      break
+      return 'bg-transparent text-blue-600 border-none'
     case 'icon':
-      baseClasses.push(
-        'flex',
-        'items-center',
-        'justify-center',
-        'w-10',
-        'h-10',
-        'border-solid',
-        'text-blue-600',
-        'rounded-full'
-      )
-      break
+      return 'flex items-center justify-center w-10 h-10 border-solid text-blue-600 rounded-full'
+    default:
+      return ''
   }
+})
 
-  return baseClasses
+const buttonStyle = ref({})
+const button = ref<HTMLElement | null>(null)
+
+watchEffect(() => {
+  if (props.isLoading && button.value) {
+    const { width, height } = button.value.getBoundingClientRect()
+    buttonStyle.value = {
+      width: `${width}px`,
+      height: `${height}px`
+    }
+  } else {
+    buttonStyle.value = {}
+  }
 })
 </script>

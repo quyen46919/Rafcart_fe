@@ -18,8 +18,6 @@ export const Primary: Story = {
     template: '<Card v-bind="args" />'
   }),
   args: {
-    ...product,
-    name: 'Sofa ABC XYZ',
-    discount: -2
+    ...product
   }
 }
