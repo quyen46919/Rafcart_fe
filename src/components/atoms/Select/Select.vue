@@ -11,7 +11,7 @@
       <div
         :class="[
           { 'border-red-500 border-[1.5px]': props?.error },
-          '  border-gray-300 cursor-pointer flex justify-between items-center w-full h-[42px] px-[10px] border-[1px] rounded-md'
+          'border-gray-300 cursor-pointer flex justify-between items-center w-full h-[42px] px-[10px] border-[1px] rounded-md'
         ]"
         @click="handleIsOpen"
       >
