@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-[345px] flex flex-col">
-    <div class="text-lg font-bold pb-6 border-b">ORDER SUMMARY</div>
+  <div class="max-w-[345px] flex flex-col border pt-6 px-3">
+    <div class="text-lg font-bold pb-4 border-b">ORDER SUMMARY</div>
 
     <div class="flex flex-col">
       <ul>
@@ -18,7 +18,7 @@
           <div class="flex-1 flex justify-center">
             <span class="flex-1 text-start text-base font-medium">x {{ item.target_quantity }}</span>
             <span class="flex-1 text-end text-base font-bold">{{
-              item.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+              (item.price * item.target_quantity).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
             }}</span>
           </div>
         </li>
@@ -44,11 +44,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { withDefaults, defineProps } from 'vue'
+enum Size {
+  S = 'Small',
+  MD = 'Medium',
+  LG = 'Large',
+  XL = 'Extra Large'
+}
 interface Product {
   name: string
   price: number
   options?: {
-    size?: string
+    size?: Size
     color?: string
   }
   target_quantity: number
@@ -67,7 +73,7 @@ const subtotal = computed(() => {
 })
 
 const shippingFee = computed(() => {
-  return props.shipping_fee == 0 ? 'Free' : props.shipping_fee
+  return props.shipping_fee === 0 ? 'Free' : props.shipping_fee
 })
 
 const total = computed(() => {
