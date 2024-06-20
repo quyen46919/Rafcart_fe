@@ -1,6 +1,11 @@
 <template>
-  <div class="flex text-xl capitalize items-center font-medium h-10 w-full pl-4 bg-[#e9e4e4]">{{ section }}</div>
+  <div
+    class="h-10 w-full px-4 bg-[#e9e4e4] text-xl font-medium overflow-hidden whitespace-nowrap text-ellipsis leading-10"
+  >
+    {{ section }}
+  </div>
 </template>
+
 <script setup lang="ts">
 interface sectionBoxProp {
   section: string
