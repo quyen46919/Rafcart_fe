@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import { computed, h, reactive, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 import Input from './Input.vue'
-import { fn } from '@storybook/test'
 
 const meta: Meta<typeof Input> = {
   component: Input,

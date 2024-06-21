@@ -1,11 +1,9 @@
-import { Checkout } from '@/pages/checkout/Checkout.vue'
 import { Meta, StoryObj } from '@storybook/vue3'
 import CheckBox from './CheckBox.vue'
 import { h } from 'vue'
 
 const meta: Meta<typeof CheckBox> = {
   component: CheckBox,
-  title: 'Components/CheckBox',
   argTypes: {
     label: {
       control: 'text'
@@ -37,10 +35,8 @@ export const Primary: Story = {
     },
     template: '<CheckBox v-bind="args" :onClick="handleOnClick"/> '
   }),
-  tags: ['autodocs'],
   args: {
     checked: false,
-
     isDisabled: false,
     readonly: false,
     label: h('span', {}, [

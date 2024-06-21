@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-
+import Avatar from '@/assets/images/avatar.png'
 import ProfileMenu from './ProfileMenu.vue'
 
 const meta: Meta<typeof ProfileMenu> = {
-  component: ProfileMenu
+  component: ProfileMenu,
 }
 
 export default meta
@@ -17,5 +17,8 @@ export const Primary: Story = {
     },
     template: '<ProfileMenu v-bind="args" />'
   }),
-  args: {}
+  args: {
+    username: 'Tu',
+    avatar: Avatar
+  }
 }

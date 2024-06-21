@@ -15,82 +15,83 @@ import Account from '@/pages/profile/Account.vue'
 import Filter from '@/pages/filter/Filter.vue'
 import PageNotFound from '@/pages/pageNotFound/PageNotFound.vue'
 import { isEmpty } from 'lodash'
+import ROUTES from './domain-routes'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: '/',
+      path: ROUTES.HOME,
       name: 'home',
       component: Homepage
     },
     {
-      path: '/login',
+      path: ROUTES.LOGIN,
       name: 'login',
       component: Login
     },
     {
-      path: '/signup',
+      path: ROUTES.SIGNUP,
       name: 'signup',
       component: Signup
     },
     {
-      path: '/product-detail/:id',
+      path: ROUTES.PRODUCT_DETAIL,
       name: 'product-detail',
       component: ProductDetail
     },
     {
-      path: '/checkout',
+      path: ROUTES.CHECKOUT,
       name: 'checkout',
       component: Checkout
     },
     {
-      path: '/wishlist',
+      path: ROUTES.WISHLIST,
       name: 'wishlist',
       component: WishList
     },
     {
-      path: '/cart',
+      path: ROUTES.CART,
       name: 'cart',
       component: Cart
     },
     {
-      path: '/order-completed',
+      path: ROUTES.ORDER_COMPLETED,
       name: 'order-completed',
       component: OrderCompleted
     },
     {
-      path: '/order-cancelled',
+      path: ROUTES.ORDER_CANCELLED,
       name: 'order-cancelled',
       component: OrderCancelled
     },
     {
-      path: '/profile',
+      path: ROUTES.PROFILE,
       name: 'profile',
       component: Profile
     },
     {
-      path: '/change-password',
+      path: ROUTES.CHANGE_PASSWORD,
       name: 'change-password',
       component: ChangePassword
     },
     {
-      path: '/manage-address',
+      path: ROUTES.MANAGE_ADDRESS,
       name: 'manage-address',
       component: ManageAddress
     },
     {
-      path: '/account',
+      path: ROUTES.ACCOUNT,
       name: 'account',
       component: Account
     },
     {
-      path: '/filter',
+      path: ROUTES.FILTER,
       name: 'filter',
       component: Filter
     },
     {
-      path: '/:pathMatch(.*)*',
+      path: ROUTES.PAGE_NOT_FOUND,
       component: PageNotFound
     }
   ],
