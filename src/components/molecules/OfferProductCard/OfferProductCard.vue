@@ -10,7 +10,7 @@
           props.subLabel
         }}</span>
       </div>
-      <RouterLink :to="props.url_link">
+      <RouterLink :to="props.urlLink">
         <div v-if="props.shopButton" class="mt-4">
           <component :is="props.shopButton"></component>
         </div>
@@ -22,23 +22,24 @@
         SHOP NOW
       </button>
     </div>
-    <div class="md:w-1/2">
+    <div class="md:w-1/2 flex flex-row items-center justify-end">
       <!-- Cái ảnh e chưa sử lý mất backgroound -->
-      <img :src="props.image_url" alt="" class="w-45 h-45" />
+      <img :src="props.urlImage" :alt="props.altImage" class="w-45 h-45" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, withDefaults, defineProps } from "vue";
+import { withDefaults } from "vue";
 import type { VNode } from "vue";
 
 interface OfferProductCardProps {
   offer: string;
   label: string;
   subLabel: string;
-  url_link: string;
-  image_url: string;
+  urlLink: string;
+  urlImage: string;
+  altImage: string;
 }
 
 const props = withDefaults(defineProps<OfferProductCardProps>(), {});

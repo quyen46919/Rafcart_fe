@@ -24,7 +24,9 @@ export const Primary: Story = {
     offer: "30% offer",
     label: "Free Shipping",
     subLabel: "Attractive Natural Furniture",
-    image_url: "https://www.pngfind.com/pngs/m/8-83819_svg-royalty-free-download-beige-living-room-sofa.png",
-    url_link: "/"
+    urlImage: "https://www.pngfind.com/pngs/m/8-83819_svg-royalty-free-download-beige-living-room-sofa.png",
+    altImage: "product free shipping",
+    urlLink: "/"
+
   }
 }
