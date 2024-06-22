@@ -21,6 +21,7 @@ export const Primary: Story = {
   tags: ['autodocs'],
   args: {
     price: 5000,
-    discount: 30
+    discount: 0,
+    isTooltip: false
   }
 }
