@@ -10,7 +10,6 @@ const meta: Meta<typeof Radio> = {
 export default meta
 type Story = StoryObj<typeof Radio>
 
-// const PrefixIcon = (props: { class: string }) => h('i', { class: props.class }, [])
 
 export const Primary: Story = {
   render: (args: any) => ({
@@ -24,50 +23,33 @@ export const Primary: Story = {
     `
   }),
   args: {
+    label: "Color",
     asterisk: true,
-    sizeList: [
+    variant: "rounded",
+    valueList: [
       {
         label: "XS",
-        value: "xs",
-        variant: "rounded",
+        value: "xs"
       },
       {
         label: "S",
-        value: "s",
-        variant: "rounded",
+        value: "s"
       },
       {
         label: "M",
-        value: "m",
-        variant: "rounded",
+        value: "m"
       },
       {
         label: "L",
-        value: "l",
-        variant: "rounded",
+        value: "l"
       },
       {
         label: "XL",
-        value: "xl",
-        variant: "rounded",
+        value: "xl"
       },
     ],
-    colorList: [
-      {
-        label: "red",
-        value: "black",
-        variant: "color",
-      },
-      {
-        label: "white",
-        value: "white",
-        variant: "color",
-      },
-      {
-        label: "black",
-        value: "[#FD3D57]",
-        variant: "color",
-      },
-    ],
+    onclick: () => {
+      alert('Say Hi')
+    }
   }
 }

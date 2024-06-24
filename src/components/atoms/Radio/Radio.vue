@@ -1,119 +1,128 @@
 <template>
   <!--Radio start-->
-  <!--Size radio-->
-  <div class="flex items-start flex-col p-4">
-    <h3 class="font-medium">
-      Size
-      <span v-if="asterisk" class="text-red-600">*</span>
-    </h3>
-
-    <div class="flex items-center gap-3 mt-2">
-      <!--item radio-->
-      <div
-        v-for="(item, index) in props.sizeList"
+  <div class="">
+    <label class="font-medium text-gray-600 text-xl">
+      {{ props.variant !== VariantStatus.CIRCLE ? props.label : "" }}
+      <span
+        v-if="props.asterisk"
+        :class="{
+          'text-red-600 font-medium': props.variant !== VariantStatus.CIRCLE,
+          'text-white font-medium': props.variant === VariantStatus.CIRCLE,
+        }"
+        >*</span
+      >
+    </label>
+    <div
+      :class="{
+        'flex items-center gap-2 py-2': props.variant !== VariantStatus.CIRCLE,
+        'flex flex-col items-start justify-start gap-2 py-2':
+          props.variant === VariantStatus.CIRCLE,
+      }"
+    >
+      <label
+        v-for="(item, index) in valueList"
         :key="index"
-        :class="{ 'size-selected': value == item.value }"
+        :@click="props.onClick"
+        @click="handleSetValue(item.label, item.value)"
+        :class="[
+          {
+            'text-white bg-red-400':
+              (item.value === selectedValue.value) &
+              (props.isDisabled === false) &
+              (props.variant === VariantStatus.ROUNDED),
+          },
+          {
+            'border-red-400 border-[3px]':
+              (item.value === selectedValue.value) &
+              (props.isDisabled === false) &
+              (props.variant === VariantStatus.COLOR),
+          },
+          {
+            'bg-red-300 border-[4px]':
+              (item.value === selectedValue.value) &
+              (props.isDisabled === false) &
+              (props.variant === VariantStatus.CIRCLE),
+          },
+          classes,
+          'flex items-center justify-center w-7 h-7 text-gray-700 font-medium',
+        ]"
+        :style="{
+          backgroundColor:
+            props.variant === VariantStatus.COLOR ? item.value : '',
+        }"
       >
         <input
           type="radio"
-          name="size"
+          name="radio"
           class="hidden"
-          :value="targetSize"
-          :id="'size-' + item.value"
-          v-model="value"
+          @click="props.onClick"
+          :disabled="props.isDisabled"
+          :value="value"
         />
-        <label
-          :for="'size-' + item.value"
-          class="size-label text-xs border border-gray-400 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600 font-bold"
-          @click="handleChangeSize(item.value)"
+        <span
+          :class="{
+            'absolute left-16': props.variant === VariantStatus.CIRCLE,
+          }"
         >
-          {{ item.label }}
-        </label>
-      </div>
-    </div>
-  </div>
-  <!--Color radio-->
-  <div class="flex items-start flex-col p-4">
-    <h3 class="font-medium">
-      Color
-      <span v-if="asterisk" class="text-red-600">*</span>
-    </h3>
-
-    <div class="flex items-center gap-3 mt-2">
-      <!--item radio-->
-      <div
-        v-for="(item, index) in props.colorList"
-        :key="index"
-        class="color-selected flex flex-col items-center justify-center gap-2"
-      >
-        <input
-          type="radio"
-          name="color"
-          class="hidden"
-          :value="targetColor"
-          :id="'color-' + item.value"
-          v-model="value"
-        />
-        <label
-          :for="'color-' + item.value"
-          :class="
-            'color-label text-xs border border-gray-400 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-gray-600 font-bold ' +
-            'bg-' +
-            item.value
-          "
-          @click="handleChangeColor(item.value)"
-        >
-        </label>
-      </div>
+          {{ props.variant !== VariantStatus.COLOR ? item.label : "" }}
+        </span>
+      </label>
     </div>
   </div>
   <!--Radio end-->
 </template>
 
 <script setup lang="ts">
-import { ref, withDefaults, defineProps } from "vue";
+import { ref, Ref, computed } from "vue";
 import type { VNode } from "vue";
+import VariantStatus from "./enum/variant.ts";
 
 interface RadioProps {
-  sizeList: {
+  label: string | VNode;
+  asterisk: boolean;
+  isDisabled: boolean;
+  variant: VariantStatus;
+  valueList: {
     label: string;
     value: string;
-    variant: "rounded" | "color" | "circle";
   }[];
-
-  colorList: {
+  value: {
     label: string;
     value: string;
-    variant: "rounded" | "color" | "circle";
-  }[];
-
-  asterisk: true;
-  onClick: (event: MouseEvent) => void;
+  };
+  ref?: Ref<any>;
+  onClick?: (event: MouseEvent) => void;
 }
+
 const props = withDefaults(defineProps<RadioProps>(), {
-  sizeList: [],
-  colorList: [],
-  asterisk: true,
+  valueList: [],
+  value: {
+    label: "",
+    value: "",
+  },
 });
 
-const targetSize = ref<string>("");
-const targetColor = ref<string>("");
+const selectedValue = ref(props.value);
+console.log(selectedValue);
 
-const handleChangeSize = (size: string) => {
-  targetSize.value = size;
+const handleSetValue = (newLabel: string, newValue: string) => {
+  selectedValue.value.label = newLabel;
+  selectedValue.value.value = newValue;
 };
 
-const handleChangeColor = (color: string) => {
-  targetColor.value = color;
-};
+const labelStyle = ref({});
+const label = ref<HTMLElement | null>(null);
+
+const classes = computed(() => {
+  switch (props.variant) {
+    case "rounded":
+      return "text-gray-700 rounded-sm border border-gray-400";
+    case "color":
+      return `relative border border-gray-400 text-gray-700 bg-[#f9f9f9]`;
+    case "circle":
+      return "border-red-400 rounded-full border-[2px]";
+    default:
+      return "";
+  }
+});
 </script>
-
-<style scoped>
-.size-selected .size-label {
-  background-color: rgb(254, 61, 87);
-  color: rgb(255, 255, 255);
-}
-.color-selected .color-label {
-  border: 2px solid rgb(254, 61, 87);
-}
-</style>
