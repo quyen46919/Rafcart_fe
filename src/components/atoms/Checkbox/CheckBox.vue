@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, withDefaults, VNode } from 'vue'
+import { defineProps, withDefaults, VNode } from 'vue'
 
 interface InputProps {
   checked: boolean
