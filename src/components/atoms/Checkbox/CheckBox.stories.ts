@@ -1,4 +1,3 @@
-import { Checkout } from '@/pages/checkout/Checkout.vue'
 import { Meta, StoryObj } from '@storybook/vue3'
 import CheckBox from './CheckBox.vue'
 import { h } from 'vue'

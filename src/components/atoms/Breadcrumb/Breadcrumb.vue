@@ -36,11 +36,13 @@
 import { VNode, onMounted, ref } from 'vue'
 
 interface BreadcrumbProps {
-  breadcrumbs: {
-    url: string
-    label: string
-    prefixIcon?: VNode
-  }[]
+  breadcrumbs:
+    | {
+        url: string
+        label: string
+        prefixIcon?: VNode
+      }[]
+    | any
   mode: 'light' | 'dark'
 }
 const props = withDefaults(defineProps<BreadcrumbProps>(), {

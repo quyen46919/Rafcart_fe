@@ -17,20 +17,5 @@ export const Primary: Story = {
     },
     template: '<Footer v-bind="args" />'
   }),
-  args: {
-    links: [
-      {
-        url: '/home',
-        label: 'Homepage'
-      },
-      {
-        url: '/products',
-        label: 'Products'
-      },
-      {
-        url: '/products/123',
-        label: 'ABC XYZ name'
-      }
-    ]
-  }
+  args: {}
 }

@@ -287,7 +287,6 @@ import ProductAPI from '@/api/product.api'
 import CardProps from '@/interfaces/card'
 
 const cardList = ref<CardProps[]>([])
-console.log('cardList', cardList.length)
 
 type DisplayTypes = 'col' | 'row'
 const targetDisplayType = ref<DisplayTypes>('col')

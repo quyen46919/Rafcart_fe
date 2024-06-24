@@ -3,7 +3,6 @@
     <div @mouseleave="mouseOverRating = null">
       <star-rating
         :show-rating="false"
-        :rating="props?.rating"
         :star-size="props?.size"
         :read-only="props?.readOnly"
         :max-rating="props?.maxRating"
@@ -24,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 import StarRating from 'vue-star-rating'
 
 interface RatingProps {
@@ -44,11 +43,10 @@ const props = withDefaults(defineProps<RatingProps>(), {
   status: 'number'
 })
 
-const rating = ref(null)
-const mouseOverRating = ref(null)
+const mouseOverRating = ref()
 const clickRatingText = ref(props?.rating)
 
-const handleMouseOverRating = (e) => {
+const handleMouseOverRating = (e: number) => {
   mouseOverRating.value = e
 }
 
@@ -59,8 +57,6 @@ const ratingStatus = computed(() => {
 const ratingClickStatus = computed(() => {
   return getRatingStatus(clickRatingText.value)
 })
-
-const formatNumber = (number) => (number < 10 ? '0' + number : number)
 
 const getRatingStatus = (rating: number) => {
   const ratio = rating / props.maxRating
