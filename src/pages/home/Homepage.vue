@@ -157,6 +157,7 @@
     <!-- product wrapper end -->
   </div>
   <!-- recomended for you end -->
+     <van-button type="primary" class="bg-primary">button</van-button>
 </template>
 
 <script setup lang="ts">

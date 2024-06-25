@@ -9,6 +9,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import router from './router'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { ConfigProvider } from 'vant'
 import './style.css'
 
 library.add(fas, far, fab)
@@ -19,4 +20,5 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 app.use(router)
+app.use(ConfigProvider)
 app.component('font-awesome-icon', FontAwesomeIcon).mount('#app')
