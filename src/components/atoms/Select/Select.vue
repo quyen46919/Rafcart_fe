@@ -56,7 +56,7 @@
             :key="option.label"
             @click="handleSetValueSelected(option)"
             :class="[
-              { 'font-bold bg-gray-100': option.value === selectedValue.value },
+              { 'font-bold bg-gray-100': option.value === selectedValue?.value },
               'w-full h-[42px] px-3 flex justify-start items-center hover:bg-gray-100 cursor-pointer truncate'
             ]"
           >
@@ -76,19 +76,15 @@ interface SelectionProp {
   label?: string
   asterisk?: boolean
   placeholder?: string
-  valueList: {
-    label: string
-    value: string
-  }[]
-  value: SelectOption
+  valueList: SelectOption[]
+  value: SelectOption | null
   error?: boolean
   helperText?: string
   ref?: Ref<any>
   isDisabled?: boolean
 }
 const props = withDefaults(defineProps<SelectionProp>(), {
-  value: { label: '', value: '' },
-  valueList: []
+  value: null
 })
 
 const selectedValue = ref(props.value)

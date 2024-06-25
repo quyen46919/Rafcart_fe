@@ -1,7 +1,7 @@
 <template>
   <div id="gallery" class="max-w-[36rem] flex flex-col gap-4">
     <carousel :items-to-show="1" :wrap-around="true" v-model="currentSlide">
-      <slide v-for="slide in props?.image_list" :key="slide">
+      <slide v-for="slide in props?.imageList" :key="slide">
         <div class="w-full max-h-[30rem]">
           <img :src="slide" alt="" class="w-full h-full object-cover object-center bg-gray-200" />
         </div>
@@ -25,7 +25,7 @@
         v-model="currentSlide"
         ref="carousel"
       >
-        <slide v-for="(slide, index) in props?.image_list" :key="slide">
+        <slide v-for="(slide, index) in props?.imageList" :key="slide">
           <div class="carousel__item cursor-pointer" @click="handleClickSlideTo(index)">
             <img :src="slide" alt="" class="w-full h-full object-cover object-center bg-gray-200" />
           </div>
@@ -56,11 +56,9 @@ import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 
 interface ImageGalleryProps {
-  image_list: string[]
+  imageList: string[]
 }
-const props = withDefaults(defineProps<ImageGalleryProps>(), {
-  image_list: []
-})
+const props = withDefaults(defineProps<ImageGalleryProps>(), {})
 
 const currentSlide = ref(0)
 

@@ -6,4 +6,5 @@
 export {}
 declare global {
   const VantConfig: typeof import('vant/es')['tConfig']
+  const showToast: typeof import('vant/es')['showToast']
 }
