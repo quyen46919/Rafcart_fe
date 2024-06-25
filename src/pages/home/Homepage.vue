@@ -156,8 +156,6 @@
     <div v-else>Loading recommend products...</div>
     <!-- product wrapper end -->
   </div>
-  <!-- recomended for you end -->
-  <van-button type="primary" class="bg-primary">button</van-button>
 </template>
 
 <script setup lang="ts">
@@ -174,6 +172,7 @@ import offer from '@/assets/images/offer.jpg'
 import ProductAPI from '@/api/product.api'
 import CategoryProps from '@/interfaces/category'
 import CardProps from '@/interfaces/card'
+import Accordion from '@/components/molecules/Accordion/Accordion.vue'
 
 const categoryList = ref<CategoryProps[]>([])
 const recommendProductList = ref<CardProps[]>([])
