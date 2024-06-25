@@ -1,36 +1,35 @@
 <template>
   <div
-    @click.stop="handleToggleMenu"
-    class="transition duration-500"
+    @click.stop="props?.onCloseMenu"
+    class="transition duration-500 fixed lg:static top-0 lg:top-auto left-0 lg:left-auto opacity-0 lg:opacity-100 invisible lg:visible bg-black lg:bg-white bg-opacity-40 lg:bg-opacity-100 w-full lg:w-auto h-full lg:h-auto z-50 shadow lg:shadow-none"
     :class="{
-      '!opacity-0': isSmallScreen && (isCloseMenu || !props?.showMenuMobile),
-      'fixed top-0 left-0 opacity-1 bg-black bg-opacity-40 w-full h-full z-50 shadow ':
-        isSmallScreen && props?.showMenuMobile
+      '!opacity-100 !visible': isSmallScreen && props.showMenuMobile
     }"
   >
     <div
       @click.stop
-      class="relative group/list max-w-[20rem] md:max-w-[12.5rem] bg-white transition duration-300"
+      class="relative group/list max-w-[20rem] lg:max-w-[12.5rem] bg-white transition duration-300 translate-x-[-100%] lg:translate-x-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible"
       :class="{
-        '!translate-x-[-100%] !opacity-0': isSmallScreen && (isCloseMenu || !props?.showMenuMobile),
-        'translate-x-[0] opacity-1 h-screen overflow-y-auto': isSmallScreen && props?.showMenuMobile
+        '!translate-x-[0%]': isSmallScreen && props.showMenuMobile
       }"
     >
       <div
-        class="relative flex md:group-hover/list:flex items-center justify-center gap-6 px-4 py-3 bg-primary md:bg-secondary text-white text-xl md:text-base font-medium md:rounded-md truncate"
+        class="relative flex lg:group-hover/list:flex items-center justify-center gap-6 px-4 py-3 bg-primary lg:bg-secondary text-white text-xl lg:text-base font-medium lg:rounded-md truncate"
+        :class="{ 'lg:hidden': props?.hiddenDesktop }"
       >
-        <i class="fa-solid fa-bars hidden md:block"></i>
+        <i class="fa-solid fa-bars hidden lg:block"></i>
         <span class="truncate">All categories</span>
-        <span @click.stop="handleToggleMenu" class="flex justify-center items-center">
-          <i class="fa-solid fa-xmark block md:hidden absolute right-4 cursor-pointer"></i>
+        <span @click.stop="props?.onCloseMenu" class="flex justify-center items-center">
+          <i class="fa-solid fa-xmark block lg:hidden absolute right-4 cursor-pointer"></i>
         </span>
       </div>
       <!-- Level 1 -->
       <ul
         :class="{
-          'md:hidden md:group-hover/list:!block md:animate-moveToUp': !props?.isExpanded
+          'lg:hidden lg:group-hover/list:!block lg:animate-moveToUp': !props?.isExpanded,
+          'lg:hidden': props?.hiddenDesktop
         }"
-        class="shadow-[0_0_5px_rgba(0,0,0,0.13)] rounded-sm w-full md:mt-[10px] py-4 relative"
+        class="shadow-[0_0_5px_rgba(0,0,0,0.13)] rounded-sm w-full lg:mt-[10px] py-4 relative"
       >
         <li
           v-for="category in categories"
@@ -40,7 +39,7 @@
         >
           <RouterLink
             :to="category?.subcategories && category?.subcategories.length ? '#' : `/category/${category?.slug}`"
-            class="flex items-center justify-between px-5 py-3 md:pl-6 md:pr-4 hover:bg-gray-200 cursor-pointer"
+            class="flex items-center justify-between px-5 py-3 lg:pl-6 lg:pr-4 hover:bg-gray-200 cursor-pointer"
           >
             <div class="flex items-center gap-6 truncate">
               <span v-html="category?.icon_url" class="opacity-40 w-[22px] h-[22px]"></span>
@@ -48,7 +47,7 @@
             </div>
             <span
               v-if="category?.subcategories && category?.subcategories.length"
-              class="md:group-hover/item:translate-x-1 transition duration-300 text-gray-600 rotate-90 md:rotate-0"
+              class="lg:group-hover/item:translate-x-1 transition duration-300 text-gray-600 rotate-90 lg:rotate-0"
               :class="{
                 '!-rotate-90': isSmallScreen ? expandedCategories.includes(category?.id) : false
               }"
@@ -70,20 +69,20 @@
               category?.subcategories.length &&
               (isSmallScreen ? expandedCategories.includes(category?.id) : true)
             "
-            class="md:absolute left-full md:w-[61rem] top-0 md:hidden md:group-hover/item:flex md:animate-unMoveToLeft md:group-hover/item:animate-moveToLeft bg-white md:border md:border-gray-200 md:rounded-md pr-5 md:p-5"
+            class="lg:absolute left-full lg:w-[61rem] top-0 lg:hidden lg:group-hover/item:flex lg:animate-unMoveToLeft lg:group-hover/item:animate-moveToLeft bg-white lg:border lg:border-gray-200 lg:rounded-md pr-5 lg:p-5"
           >
-            <ul class="flex-1 md:grid md:grid-cols-3 gap-y-0 md:gap-x-3">
+            <ul class="flex-1 lg:grid lg:grid-cols-3 gap-y-0 lg:gap-x-3">
               <li
                 v-for="subcategory in category?.subcategories"
                 :key="subcategory?.id"
                 class="relative group/item mb-3"
               >
                 <div
-                  class="flex justify-between md:justify-start items-center md:text-lg md:font-medium pl-16 md:pl-0 mb-2 cursor-pointer md:cursor-default"
+                  class="flex justify-between lg:justify-start items-center lg:text-lg lg:font-medium pl-16 lg:pl-0 mb-2 cursor-pointer lg:cursor-default"
                   @click.stop="handleToggleItem(subcategory?.id, 'subcategory')"
                 >
                   <span class="truncate flex-1">{{ subcategory?.name }}</span>
-                  <span class="block md:hidden text-gray-600">
+                  <span class="block lg:hidden text-gray-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18px"
@@ -112,16 +111,16 @@
                     subcategory?.subcategories.length &&
                     (isSmallScreen ? expandedSubcategories.includes(subcategory?.id) : true)
                   "
-                  class="left-full top-0 md:group-hover/item:flex bg-white flex-col gap-2"
+                  class="left-full top-0 lg:group-hover/item:flex bg-white flex-col gap-2"
                 >
                   <li
                     v-for="subSubcategory in subcategory?.subcategories"
                     :key="subSubcategory?.id"
-                    class="hover:text-primary cursor-pointer pl-20 md:pl-0"
+                    class="hover:text-primary cursor-pointer pl-20 lg:pl-0"
                   >
                     <RouterLink
                       :to="`/category/${category?.slug}/${subSubcategory?.slug}`"
-                      class="block w-full truncate md:leading-5"
+                      class="block w-full truncate lg:leading-5"
                     >
                       {{ subSubcategory?.name }}
                     </RouterLink>
@@ -129,8 +128,8 @@
                 </ul>
               </li>
             </ul>
-            <ul class="md:grid md:grid-cols-2 gap-3 w-1/4 hidden">
-              <li v-for="(brand, index) in brands" :key="index" class="relative md:group/item">
+            <ul class="lg:grid lg:grid-cols-2 gap-3 w-1/4 hidden">
+              <li v-for="(brand, index) in brands" :key="index" class="relative lg:group/item">
                 <RouterLink
                   :to="`/brand/${brand?.slug}`"
                   class="flex items-center p-2 cursor-default shadow-[0_0_5px_rgba(0,0,0,0.13)] rounded text-center justify-center h-11 overflow-hidden"
@@ -145,6 +144,7 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import brands from '@/faker/home/brands'
 import Category from '@/interfaces/category'
@@ -152,27 +152,24 @@ import { onMounted, onUnmounted, ref } from 'vue'
 
 interface CategoryMenuProp {
   isExpanded: boolean
+  hiddenDesktop: boolean
   showMenuMobile: boolean
   categories: Category[]
+  onCloseMenu: Function
 }
 
 const props = withDefaults(defineProps<CategoryMenuProp>(), {
   isExpanded: true,
+  hiddenDesktop: false,
   showMenuMobile: true
 })
 
 const expandedCategories = ref<string[]>([])
 const expandedSubcategories = ref<string[]>([])
-const isSmallScreen = ref<boolean>(window.innerWidth < 768)
-const isCloseMenu = ref<boolean>(false)
+const isSmallScreen = ref<boolean>(window.innerWidth < 992)
 
 const handleResize = () => {
-  isSmallScreen.value = window.innerWidth < 768
-}
-
-const handleToggleMenu = () => {
-  console.log({ a: isCloseMenu.value })
-  isCloseMenu.value = true
+  isSmallScreen.value = window.innerWidth < 992
 }
 
 const handleToggleItem = (id: string, type: 'category' | 'subcategory') => {
