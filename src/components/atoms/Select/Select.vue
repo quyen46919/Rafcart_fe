@@ -90,28 +90,28 @@ import { Ref, ref } from 'vue'
 import SelectOption from '@/interfaces/common'
 
 type StyleObject = Record<string, string>
-interface SelectionProp {
+interface SelectionProps {
   label?: string
   asterisk?: boolean
   placeholder?: string
-  selectStyle: StyleObject | string | {}
-  iconStyle: StyleObject | string | {}
-  optionStyle: StyleObject | string | {}
-  optionItemStyle: StyleObject | string | {}
-  valueList: {
-    label: string
-    value: string
-  }[]
+  selectStyle?: StyleObject | string | {}
+  iconStyle?: StyleObject | string | {}
+  optionStyle?: StyleObject | string | {}
+  optionItemStyle?: StyleObject | string | {}
+  valueList: SelectOption[]
   value: SelectOption
   error?: boolean
   helperText?: string
   ref?: Ref<any>
   isDisabled?: boolean
 }
-const props = withDefaults(defineProps<SelectionProp>(), {
-  value: { label: '', value: '' },
 
-  valueList: []
+const props = withDefaults(defineProps<SelectionProps>(), {
+  value: (): SelectOption => ({
+    label: '',
+    value: ''
+  }),
+  valueList: (): SelectOption[] => []
 })
 
 const selectedValue = ref(props.value)
