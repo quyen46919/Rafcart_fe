@@ -26,6 +26,7 @@ declare module 'vue' {
     ProfileMenu: typeof import('./src/components/molecules/ProfileMenu/ProfileMenu.vue')['default']
     Rating: typeof import('./src/components/atoms/Rating/Rating.vue')['default']
     RButton: typeof import('./src/components/atoms/RButton/RButton.vue')['default']
+    ReturnProductCard: typeof import('./src/components/molecules/ReturnProductCard/ReturnProductCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     RowCard: typeof import('./src/components/molecules/RowCard/RowCard.vue')['default']
@@ -33,10 +34,7 @@ declare module 'vue' {
     Select: typeof import('./src/components/atoms/Select/Select.vue')['default']
     ServiceCard: typeof import('./src/components/molecules/ServiceCard/ServiceCard.vue')['default']
     VanButton: typeof import('vant/es')['Button']
-    VanCollapse: typeof import('vant/es')['Collapse']
-    VanCollapseItem: typeof import('vant/es')['CollapseItem']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
-    VanIcon: typeof import('vant/es')['Icon']
     WishlistProductCard: typeof import('./src/components/molecules/WishlistProductCard/WishlistProductCard.vue')['default']
   }
 }
