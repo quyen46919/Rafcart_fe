@@ -23,6 +23,7 @@ declare module 'vue' {
     MobileMenu: typeof import('./src/components/layouts/MobileMenu/MobileMenu.vue')['default']
     MobileSidebarMenu: typeof import('./src/components/layouts/MobileSidebarMenu/MobileSidebarMenu.vue')['default']
     Navbar: typeof import('./src/components/layouts/Navbar/Navbar.vue')['default']
+    OrderHistoryCard: typeof import('./src/components/molecules/OrderHistoryCard/OrderHistoryCard.vue')['default']
     OrderSummary: typeof import('./src/components/molecules/OrderSummary/OrderSummary.vue')['default']
     ProfileMenu: typeof import('./src/components/molecules/ProfileMenu/ProfileMenu.vue')['default']
     Rating: typeof import('./src/components/atoms/Rating/Rating.vue')['default']
