@@ -2,12 +2,10 @@ import { Meta, StoryObj } from '@storybook/vue3'
 import PriceViewer from './PriceViewer.vue'
 
 const meta: Meta<typeof PriceViewer> = {
-  component: PriceViewer,
-  title: 'Components/PriceViewer'
+  component: PriceViewer
 }
 
 export default meta
-
 type Story = StoryObj<typeof PriceViewer>
 
 export const Primary: Story = {
@@ -20,8 +18,8 @@ export const Primary: Story = {
   }),
   tags: ['autodocs'],
   args: {
-    price: 5000,
-    discount: 0,
-    isTooltip: false
+    price: 1200,
+    discount: 15,
+    showPercent: true
   }
 }

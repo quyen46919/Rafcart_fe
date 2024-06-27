@@ -1,18 +1,18 @@
 <template>
   <div class="flex flex-col md:flex-row border rounded-sm w-full max-w-[875px] overflow-hidden">
-    <img :src="productImage" alt="Product Image" class="w-full md:w-[276px] h-[260px] object-cover" />
+    <img :src="thumbnail" alt="Product Image" class="w-full md:w-[276px] h-[260px] object-cover" />
     <div class="flex flex-col justify-between w-full p-4 md:p-6">
       <div>
-        <div class="text-xl font-semibold truncate w-full md:w-[520px] overflow-hidden" :title="productName">
-          {{ productName }}
+        <div class="text-xl font-semibold truncate w-full md:w-[520px] overflow-hidden" :title="name">
+          {{ name }}
         </div>
         <div class="flex items-center space-x-2 my-1">
           <span class="text-red-500 font-semibold">${{ calculatePrice(price, discount) }}</span>
           <span v-if="discount > 0" class="line-through text-gray-400">${{ price.toFixed(2) }}</span>
         </div>
         <div class="flex items-center space-x-1 my-4">
-          <Rating :max-rating="5" :rating="rating" :read-only="true" />
-          <span class="text-gray-600">({{ reviewCount }})</span>
+          <Rating :max-rating="5" :rating="averageRating" :read-only="true" />
+          <span class="text-gray-600">({{ props?.comments?.length }})</span>
         </div>
         <div class="text-gray-600 line-clamp-2 mb-2 w-full md:w-[520px]">
           {{ description }}
@@ -52,18 +52,11 @@ import RButton from '@/components/atoms/RButton/RButton.vue'
 import Rating from '@/components/atoms/Rating/Rating.vue'
 import { useWishList } from '@/store/wishlistStore'
 import { computed } from 'vue'
+import CardProps from '@/interfaces/card'
 
 const wishlistStore = useWishList()
 
-interface ProductProps {
-  id: number
-  productName: string
-  productImage: string
-  price: number
-  discount: number
-  description: string
-  rating: number
-  reviewCount: number
+interface ProductProps extends CardProps {
   onAddToCart: () => void
 }
 
@@ -79,13 +72,9 @@ const calculatePrice = (price: number, discount: number) => {
   }
   return price.toFixed(2)
 }
-</script>
 
-<style scoped>
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
+const averageRating = computed(() => {
+  if (!props?.comments) return 0
+  return Number(props.comments?.map((item) => item.rating)?.reduce((a, b) => a + b, 0) / props.comments?.length)
+})
+</script>

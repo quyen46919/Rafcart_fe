@@ -10,7 +10,8 @@ const meta: Meta<typeof OfferProductCard> = {
 export default meta
 type Story = StoryObj<typeof OfferProductCard>
 
-const ShopButton = (props: { class: string, type: string, value: string }) => h('input', { class: props.class, type: props.type, value: props.value }, [])
+const ShopButton = (props: { class: string; type: string; value: string }) =>
+  h('input', { class: props.class, type: props.type, value: props.value }, [])
 
 export const Primary: Story = {
   render: (args: any) => ({
@@ -21,12 +22,12 @@ export const Primary: Story = {
     template: '<OfferProductCard v-bind="args" />'
   }),
   args: {
-    offer: "30% offer",
-    label: "Free Shipping",
-    subLabel: "Attractive Natural Furniture",
-    urlImage: "https://www.pngfind.com/pngs/m/8-83819_svg-royalty-free-download-beige-living-room-sofa.png",
-    altImage: "product free shipping",
-    urlLink: "/"
-
+    offer: '30% offer',
+    label: 'Free Shipping',
+    subLabel: 'Attractive Natural Furniture',
+    urlImage:
+      'https://png.pngtree.com/png-clipart/20230122/original/pngtree-modern-laptop-mockup-perspective-view-png-image_8925503.png',
+    altImage: 'product free shipping',
+    href: '/'
   }
 }

@@ -18,15 +18,22 @@ export const Primary: Story = {
     template: '<VerticalProductCard v-bind="args" />'
   }),
   args: {
-    tag: 'HOT',
-    productThumbnail: 'https://www.easypages.url.tw/w3layouts020/assets/images/product1.jpg',
-    productName: 'MADELINE sofa',
-    productDes: 'Fabric Sofa Bed',
-    productPrice: 120,
-    productRate: 5,
-    productReview: 150,
+    tag: 10,
+    thumbnail: 'https://www.easypages.url.tw/w3layouts020/assets/images/product1.jpg',
+    name: 'MADELINE sofa',
+    description: 'Fabric Sofa Bed',
+    price: 120,
     isWishlist: false,
-    urlDetail: '#',
+    href: '#',
+    comments: [
+      {
+        id: 1,
+        parent_id: null,
+        comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+        rating: 4,
+        updated_at: 'tody'
+      }
+    ],
     onAddToCart: () => alert('add to cart'),
     onViewDetail: () => alert('view detail'),
     onWishlist: () => alert('handle wishlist')

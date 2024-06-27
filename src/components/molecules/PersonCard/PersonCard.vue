@@ -1,8 +1,7 @@
 <template>
   <div class="max-w-[275px] bg-white rounded-lg">
     <RouterLink :to="props.url">
-      <img class="rounded-t-lg w-full h-[285px] object-cover" :src="props.img" @error="imageUrlAlt"
- />
+      <img class="rounded-t-lg w-full h-[285px] object-cover" :src="props.img" @error="errImageAlt" />
     </RouterLink>
     <h3 class="pt-3 mx-4 text-ellipsis overflow-hidden whitespace-nowrap text-sm text-center font-medium text-gray-900">
       {{ props.name }}
@@ -19,14 +18,13 @@ interface PersonCardProps {
   name: string
   title: string
   url: string
-  placeholderAltImg : string
+  placeholderAltImg: string
 }
 
-const props = withDefaults(defineProps<PersonCardProps>(), {
-  alt: '' 
-})
-function imageUrlAlt(event: Event) {
-  const imgElement = event.target as HTMLImageElement;
-  imgElement.src = props.placeholderAltImg;
+const props = withDefaults(defineProps<PersonCardProps>(), {})
+
+function errImageAlt(event: Event) {
+  const imgElement = event.target as HTMLImageElement
+  imgElement.src = props.placeholderAltImg
 }
 </script>

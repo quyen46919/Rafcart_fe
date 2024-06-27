@@ -99,5 +99,5 @@ export default {
       display: ['group-hover']
     }
   },
-  plugins: [require('@tailwindcss/forms')]
+  // plugins: [require('@tailwindcss/forms')]
 }

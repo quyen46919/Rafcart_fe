@@ -15,7 +15,7 @@ import Account from '@/pages/profile/Account.vue'
 import Filter from '@/pages/filter/Filter.vue'
 import PageNotFound from '@/pages/pageNotFound/PageNotFound.vue'
 import { isEmpty } from 'lodash'
-import ROUTES from './ROUTES'
+import ROUTES from './domain-routes'
 
 const router = createRouter({
   history: createWebHistory(),
