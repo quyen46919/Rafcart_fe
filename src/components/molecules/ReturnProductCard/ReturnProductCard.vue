@@ -7,11 +7,11 @@
     <div class="w-1/12 flex flex-col items-end gap-3">
       <img :src="item.image" alt="img.png" class="w-fit h-[40px]" />
     </div>
-    <div class="w-1/4 flex flex-col items-start">
-      <label class="font-bold text-gray-600 text-[14px]">
+    <div class="w-1/4 flex flex-col items-start truncate">
+      <label class="font-bold text-gray-600 text-[14px] truncate">
         {{ item.orderName }}
       </label>
-      <span class="font-bold text-gray-600 text-[14px]">
+      <span class="font-bold text-gray-600 text-[14px] truncate">
         ${{ item.price }}
       </span>
     </div>
