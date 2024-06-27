@@ -29,6 +29,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     RowCard: typeof import('./src/components/molecules/RowCard/RowCard.vue')['default']
+    SaleOffProductCard: typeof import('./src/components/molecules/SaleOffProductCard/SaleOffProductCard.vue')['default']
     SectionBox: typeof import('./src/components/molecules/SectionBox/SectionBox.vue')['default']
     Select: typeof import('./src/components/atoms/Select/Select.vue')['default']
     ServiceCard: typeof import('./src/components/molecules/ServiceCard/ServiceCard.vue')['default']
