@@ -24,8 +24,8 @@
         }}</span>
       </div>
       <div class="flex mt-1 gap-2 items-end">
-        <rating :rating="props?.rating" :readOnly="true" :size="16" />
-        <span class="text-sm text-gray-500 truncate">{{ props?.reviews }}</span>
+        <rating :rating="averageRating" :readOnly="true" :size="16" />
+        <span class="text-sm text-gray-500 truncate">{{ props?.comments?.length }}</span>
       </div>
     </div>
   </div>
@@ -34,17 +34,22 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import Rating from '@/components/atoms/Rating/Rating.vue'
-import { MiniProductCardProps } from '@/interfaces/miniProductCard'
+import CardProps from '@/interfaces/card'
 
-const props = withDefaults(defineProps<MiniProductCardProps>(), {
+const props = withDefaults(defineProps<Partial<CardProps>>(), {
   discount: 0
 })
 
 const priceDiscount = computed(() => {
-  if (props?.discount < 0 || props?.discount > 100) return NaN
+  if (props?.discount < 0 || props?.discount > 100) return 0
   return (props?.price * ((100 - props?.discount) / 100)).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD'
   })
+})
+
+const averageRating = computed(() => {
+  if (!props?.comments) return 0
+  return Number(props.comments?.map((item) => item.rating)?.reduce((a, b) => a + b, 0) / props.comments?.length)
 })
 </script>

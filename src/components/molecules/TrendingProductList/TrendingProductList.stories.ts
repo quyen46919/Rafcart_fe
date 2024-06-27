@@ -28,17 +28,31 @@ export const Primary: Story = {
             name: 'Adidas Trefoil Hoodie',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
-            url: '/adidas-trefoil-hoodie'
+            url: '/adidas-trefoil-hoodie',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ]
           },
           {
             thumbnail: 'https://www.easypages.url.tw/w3layouts020/assets/images/prod-6.png',
             name: 'REG BROADCLOTH',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -46,8 +60,15 @@ export const Primary: Story = {
             name: 'Blazer Tenia - Lana-Beige',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -55,8 +76,15 @@ export const Primary: Story = {
             name: 'Adidas Trefoil Hoodie',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           }
         ]
@@ -70,8 +98,15 @@ export const Primary: Story = {
             name: 'Jump-Rings Connectors',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -79,8 +114,15 @@ export const Primary: Story = {
             name: 'SWAROVSKI Fine Bracelet',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -88,8 +130,15 @@ export const Primary: Story = {
             name: 'Hilfiger Tommy Hilfiger',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -97,8 +146,15 @@ export const Primary: Story = {
             name: 'Adidas Trefoil Hoodie',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           }
         ]
@@ -112,8 +168,15 @@ export const Primary: Story = {
             name: 'Adidas Trefoil Hoodie',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -121,8 +184,15 @@ export const Primary: Story = {
             name: 'REG BROADCLOTH',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           },
           {
@@ -130,8 +200,15 @@ export const Primary: Story = {
             name: 'Blazer Tenia - Lana-Beige',
             price: 55.45,
             discount: 10,
-            rating: 4,
-            reviews: '(150)',
+            comments: [
+              {
+                id: 1,
+                parent_id: null,
+                comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+                rating: 4,
+                updated_at: 'tody'
+              }
+            ],
             url: '/adidas-trefoil-hoodie'
           }
         ]

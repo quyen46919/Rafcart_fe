@@ -13,6 +13,7 @@ const ROUTES = {
   MANAGE_ADDRESS: '/manage-address',
   ACCOUNT: '/account',
   FILTER: '/filter',
-  PAGE_NOT_FOUND: '/:pathMatch(.*)*',
-};
-export default ROUTES;
+  PAGE_NOT_FOUND: '/:pathMatch(.*)*'
+}
+
+export default ROUTES

@@ -26,8 +26,15 @@ export const Primary: Story = {
     name: 'Adidas Trefoil Hoodie',
     price: 55.45,
     discount: 10,
-    rating: 4,
-    reviews: '(150)',
+    comments: [
+      {
+        id: 1,
+        parent_id: null,
+        comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
+        rating: 4,
+        updated_at: 'tody'
+      }
+    ],
     url: '/adidas-trefoil-hoodie'
   }
 }

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-
 import Loader from './Loader.vue'
 
 const meta: Meta<typeof Loader> = {

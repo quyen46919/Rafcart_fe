@@ -9,27 +9,19 @@
     </div>
     <ul class="flex flex-col gap-6">
       <li v-for="(item, index) in props?.data.slice(0, 3)" :key="index">
-        <mini-product-card
-          :name="item?.name"
-          :url="item?.url"
-          :thumbnail="item?.thumbnail"
-          :price="item?.price"
-          :discount="item?.discount"
-          :rating="item?.rating"
-          :reviews="item?.reviews"
-        />
+        <mini-product-card v-bind="item" />
       </li>
     </ul>
   </div>
 </template>
 <script setup lang="ts">
-import { MiniProductCardProps } from '@/interfaces/miniProductCard'
+import CardProps from '@/interfaces/card'
 import arrowRight from '@/assets/images/icons/arrow-right.svg'
 
 export interface TrendingProductItemProps {
   title: string
   url: string
-  data: MiniProductCardProps[]
+  data: CardProps[]
 }
 const props = withDefaults(defineProps<TrendingProductItemProps>(), {})
 </script>
