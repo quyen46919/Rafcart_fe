@@ -31,6 +31,9 @@ export const Primary: Story = {
     ],
     value: { label: '', value: '' },
     error: true,
+    selectStyle: 'hover:text-primary',
+    iconStyle: 'group-hover:text-primary',
+    optionItemStyle: 'hover:text-primary',
     helperText: 'Please select an option',
     isDisabled: false
   }
