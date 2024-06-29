@@ -18,6 +18,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/layouts/Footer/Footer.vue')['default']
     Header: typeof import('./src/components/layouts/Header/Header.vue')['default']
     ImageGallery: typeof import('./src/components/molecules/ImageGallery/ImageGallery.vue')['default']
+    ImageUploader: typeof import('./src/components/molecules/ImageUploader/ImageUploader.vue')['default']
     Input: typeof import('./src/components/atoms/Input/Input.vue')['default']
     IntroCategoryBox: typeof import('./src/components/molecules/IntroCategoryBox/IntroCategoryBox.vue')['default']
     Loader: typeof import('./src/components/atoms/Loader/Loader.vue')['default']
@@ -49,6 +50,7 @@ declare module 'vue' {
     VanCollapseItem: typeof import('vant/es')['CollapseItem']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
     VanIcon: typeof import('vant/es')['Icon']
+    VanUploader: typeof import('vant/es')['Uploader']
     VerticalProductCard: typeof import('./src/components/molecules/VerticalProductCard/VerticalProductCard.vue')['default']
     WishlistProductCard: typeof import('./src/components/molecules/WishlistProductCard/WishlistProductCard.vue')['default']
   }
