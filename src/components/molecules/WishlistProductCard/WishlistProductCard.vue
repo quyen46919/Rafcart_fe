@@ -1,13 +1,17 @@
 <template>
   <div
-    class="xl:w-full w-fit md:w-fit p-[21px] flex flex-col md:flex-row md:items-center items-start md:justify-between justify-start gap-[30px] border-[1px] rounded-md border-gray-300 transition duration-500"
+    class="max-w-[320px] md:max-w-full w-full mx-auto p-[21px] block md:flex flex-col md:flex-row md:items-center items-start md:justify-between justify-start gap-[30px] border-[1px] rounded-md border-gray-300 transition duration-500"
   >
-    <div class="flex flex-col flex-grow md:flex-row md:items-center items-start gap-[30px]">
-      <img :src="props.productThumbnail" :alt="props.productThumbnail" class="max-w-[80px] max-h-[80px]" />
-      <div class="w-full truncate flex flex-col justify-start">
+    <div class="grid md:grid-cols-[80px_auto] gap-[30px]">
+      <img
+        :src="props.productThumbnail"
+        :alt="props.productThumbnail"
+        class="max-w-[80px] max-h-[80px] w-full h-full object-cover"
+      />
+      <div class="w-full truncate block md:flex flex-col justify-start">
         <RouterLink
           :to="props.urlDetail"
-          class="md:max-w-[560px] max-w-[320px] !block text-wrap xl:text-nowrap md:line-clamp-1 uppercase truncate line-clamp-3 cursor-pointer hover:text-primary transition duration-300"
+          class="text-wrap xl:text-nowrap uppercase lg:truncate lg:line-clamp-none md:line-clamp-1 line-clamp-3 cursor-pointer hover:text-primary transition duration-300"
           >{{ props.productName }}</RouterLink
         >
         <p>
@@ -21,7 +25,7 @@
 
     <div class="w-full md:w-fit flex flex-col md:items-center items-start md:flex-row justify-end gap-[21px]">
       <p class="font-bold text-[18px] text-primary">
-        {{ props.productPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }}
+        {{ formatPrice(props?.productPrice) }}
       </p>
       <div class="w-full flex items-center md:justify-end justify-between md:gap-[21px] sm:gap-0">
         <RButton
@@ -48,6 +52,7 @@
 <script setup lang="ts">
 import RButton from '@/components/atoms/RButton/RButton.vue'
 import Select from '@/components/atoms/Select/Select.vue'
+import { formatPrice } from '@/shared/utils/format'
 enum StockStatus {
   InStock = 'in stock',
   OutOfStock = 'out of stock'
