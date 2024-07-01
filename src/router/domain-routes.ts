@@ -13,6 +13,7 @@ const ROUTES = {
   MANAGE_ADDRESS: '/manage-address',
   ACCOUNT: '/account',
   FILTER: '/filter',
+  FAQ: '/faq',
   PAGE_NOT_FOUND: '/:pathMatch(.*)*'
 }
 
