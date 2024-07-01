@@ -1,41 +1,47 @@
 <template>
-  <!-- breadcrum -->
-  <div class="py-4 container flex gap-3 items-center">
-    <a href="index.html" class="text-primary text-base">
-      <i class="fas fa-home"></i>
-    </a>
-    <span class="text-sm text-gray-400"><i class="fas fa-chevron-right"></i></span>
-    <p class="text-gray-600 font-medium uppercase">My Account</p>
-  </div>
-  <!-- breadcrum end -->
-
-  <!-- account wrapper -->
+  <breadcrumb class="!justify-start" :breadcrumbs="breadcrumbs" />
   <div class="container lg:grid grid-cols-12 items-start gap-6 pt-4 pb-16">
-    <ProfileMenu />
-
-    <!-- account content -->
+    <ProfileMenu :username="userCurrent?.userName || ''" :avatar="userCurrent?.avatar || ''" />
     <div class="col-span-9 mt-6 lg:mt-0 space-y-4">
-      <RowCard
-        v-for="card in wishlist"
-        :key="card.id"
-        v-bind="card"
-        v-bind:showAvailability="true"
-        v-bind:showRemoveFromWishlist="false"
-        v-bind:disableDeleteButton="false"
-      />
+      <template v-for="item in products">
+        <WishlistProductCard
+          :productThumbnail="item?.thumbnail || ''"
+          :productName="item?.name || ''"
+          :productPrice="item?.price || 0"
+          :urlDetail="`/product/${item?.slug}`"
+          :isStock="(item?.amount || 0) > 0"
+          :onDeleteToWishlist="() => {}"
+          :onAddToCart="() => {}"
+        />
+      </template>
     </div>
-    <!-- account content end -->
   </div>
-  <!-- account wrapper end -->
 </template>
 
 <script setup lang="ts">
-import Card from '@/components/molecules/ProfileMenu/ProfileMenu.vue'
-import RowCard from '@/components/molecules/RowCard/RowCard.vue'
-import { useWishList } from '@/store/wishlistStore'
-import { computed } from 'vue'
+import { h, onMounted, ref } from 'vue'
+import UserInfo from '@/interfaces/user'
+import user from '@/faker/auth/user'
+import cards from '@/faker/wishlist/wishlist'
+import CardProps from '@/interfaces/card'
 
-const wishlistStore = useWishList()
+const userCurrent = ref<Partial<UserInfo>>()
+const products = ref<Partial<CardProps>[]>()
 
-const wishlist = computed(() => wishlistStore.getWishlist)
+const breadcrumbs = [
+  {
+    url: '/',
+    label: 'Homepage',
+    prefixIcon: h('i', { class: 'fas fa-home mr-2' })
+  },
+  {
+    url: '/wishlist',
+    label: 'Wishlist'
+  }
+]
+
+onMounted(() => {
+  userCurrent.value = user
+  products.value = cards
+})
 </script>
