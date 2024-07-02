@@ -93,7 +93,7 @@ const router = createRouter({
     },
     {
       path: ROUTES.FAQ,
-      name: 'fqa',
+      name: 'faq',
       component: Faq
     },
     {
