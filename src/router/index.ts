@@ -14,6 +14,7 @@ import ManageAddress from '@/pages/profile/ManageAddress.vue'
 import Account from '@/pages/profile/Account.vue'
 import Filter from '@/pages/filter/Filter.vue'
 import PageNotFound from '@/pages/pageNotFound/PageNotFound.vue'
+import Faq from '@/pages/faq/Faq.vue'
 import { isEmpty } from 'lodash'
 import ROUTES from './domain-routes'
 
@@ -89,6 +90,11 @@ const router = createRouter({
       path: ROUTES.FILTER,
       name: 'filter',
       component: Filter
+    },
+    {
+      path: ROUTES.FAQ,
+      name: 'faq',
+      component: Faq
     },
     {
       path: ROUTES.PAGE_NOT_FOUND,
