@@ -19,10 +19,10 @@
 import { h } from 'vue'
 import Breadcrumb from '@/components/atoms/Breadcrumb/Breadcrumb.vue'
 import Accordion from '@/components/molecules/Accordion/Accordion.vue'
-import dataAccordions from '@/faker/faq/faq.ts'
+import dataAccordions from '@/faker/faq'
 const Icon = (props: { class: string }) => h('i', { class: props.class }, [])
 const breadcrumbs = [
   { url: '/', label: 'HomePage', prefixIcon: h(Icon, { class: 'fas fa-home mr-2' }) },
-  { url: '/faq', label: 'FQA' }
+  { url: '/faq', label: 'FAQ' }
 ]
 </script>
