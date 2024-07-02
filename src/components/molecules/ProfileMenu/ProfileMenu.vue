@@ -1,28 +1,65 @@
 <template>
-  <div class="col-span-3">
-    <div class="px-4 py-3 w-[280px] h-[66px] shadow flex items-center gap-4">
-      <div class="flex-shrink-0">
-        <img :src="props?.avatar" class="rounded-full w-14 h-14 p-1 border border-gray-200 object-cover" />
+  <div class="col-span-3 relative">
+    <div class="w-full px-4 py-3 shadow flex items-center">
+      <div class="flex-1 flex items-center gap-4">
+        <div class="flex-shrink-0">
+          <img
+            :src="props?.avatar"
+            class="rounded-full w-14 h-14 p-1 border border-gray-200 object-cover"
+          />
+        </div>
+        <div class="grid">
+          <p class="text-gray-600 text-base">Hello,</p>
+          <h4
+            class="text-gray-800 w-40 truncate text-base capitalize font-medium"
+          >
+            {{ props?.username }}
+          </h4>
+        </div>
       </div>
-      <div>
-        <p class="text-gray-600 text-base">Hello,</p>
-        <h4 class="text-gray-800 w-40 text-ellipsis overflow-hidden whitespace-nowrap text-lg capitalize font-medium">
-          {{ props?.username }}
-        </h4>
-      </div>
+      <r-button
+        variant="icon"
+        prefix-icon="fa-solid fa-bars"
+        class="!text-black !rounded border-primary block lg:hidden"
+        :onClick="handleToggleMenu"
+      />
     </div>
 
-    <div class="mt-6 bg-white shadow rounded w-[280px] p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
+    <div
+      class="fixed top-0 left-0 bottom-0 transition duration-300 -translate-x-full lg:translate-x-0 opacity-0 lg:opacity-100 invisible lg:visible lg:relative lg:mt-6 bg-white shadow rounded max-w-[300px] w-full lg:w-full p-4 divide-y divide-gray-200 space-y-4 text-gray-600 z-10"
+      :class="{
+        '!translate-x-0 !opacity-100 !visible': toggleMenu
+      }"
+    >
+      <div class="flex-1 flex items-center gap-4 lg:hidden relative">
+        <div class="flex-shrink-0">
+          <img
+            :src="props?.avatar"
+            class="rounded-full w-14 h-14 p-1 border border-gray-200 object-cover"
+          />
+        </div>
+        <div class="grid">
+          <p class="text-gray-600 text-base">Hello,</p>
+          <h4
+            class="text-gray-800 w-40 truncate text-base capitalize font-medium"
+          >
+            {{ props?.username }}
+          </h4>
+        </div>
+        <button class="absolute top-0 right-0" @click="handleToggleMenu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
       <div
         v-for="menuItem in menuList"
         :key="menuItem.id"
-        class="space-y-1 pl-8"
-        :class="{ 'pt-4': menuItem.id !== 1 }"
+        class="space-y-1 pl-8 pt-4"
       >
         <router-link
+          activeClass="text-primary"
+          exactActiveClass="text-primary"
           :to="menuItem.url"
-          class="relative text-gray-800 font-medium capitalize hover:text-primary transition block"
-          style="cursor: pointer"
+          class="relative text-gray-800 font-medium capitalize hover:text-primary transition block cursor-pointer"
         >
           {{ menuItem.label }}
           <span class="absolute -left-8 top-0 text-base">
@@ -31,18 +68,27 @@
         </router-link>
         <div v-for="subItem in menuItem.subItems" :key="subItem.url">
           <router-link
+            activeClass="text-primary"
+            exactActiveClass="text-primary"
             :to="subItem.url"
-            class="hover:text-primary transition capitalize block"
-            style="cursor: pointer"
+            class="hover:text-primary transition capitalize block truncate cursor-pointer"
             >{{ subItem.label }}</router-link
           >
         </div>
       </div>
     </div>
+    <div
+      class="fixed top-0 left-0 bottom-0 right-0 bg-[rgba(0,0,0,0.4)] opacity-0 invisible transition block lg:hidden"
+      :class="{
+        '!opacity-100 !visible': toggleMenu
+      }"
+      :onClick="handleToggleMenu"
+    ></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import ROUTES from '@/router/domain-routes'
 
 interface ProfileMenuProps {
@@ -51,6 +97,9 @@ interface ProfileMenuProps {
 }
 
 const props = withDefaults(defineProps<ProfileMenuProps>(), {})
+const toggleMenu = ref<boolean>(false)
+
+const handleToggleMenu = () => (toggleMenu.value = !toggleMenu.value)
 
 const menuList = [
   {
@@ -70,7 +119,7 @@ const menuList = [
     label: 'My order history',
     icon: 'fas fa-gift',
     subItems: [
-      { url: ROUTES.ORDER_CANCELLED, label: 'My returns' },
+      { url: ROUTES.ORDER_COMPLETED, label: 'My returns' },
       { url: ROUTES.ORDER_CANCELLED, label: 'My cancellations' },
       { url: ROUTES.ORDER_COMPLETED, label: 'My reviews' }
     ]

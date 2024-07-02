@@ -19,6 +19,7 @@ export const Primary: Story = {
     template: '<CategoryMenu v-bind="args" />'
   }),
   args: {
-    categories: [...categories]
+    categories: [...categories],
+    onCloseMenu: () => alert('Close menu')
   }
 }

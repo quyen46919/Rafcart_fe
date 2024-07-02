@@ -3,6 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     screens: {
+      msm: '368px',
       sm: '576px',
       md: '768px',
       lg: '992px',
@@ -98,6 +99,6 @@ export default {
       visibility: ['group-hover'],
       display: ['group-hover']
     }
-  },
+  }
   // plugins: [require('@tailwindcss/forms')]
 }

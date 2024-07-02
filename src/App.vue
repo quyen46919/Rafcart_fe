@@ -11,7 +11,7 @@ import { themeVars } from './theme'
   <van-config-provider :theme-vars="themeVars" theme-vars-scope="global">
     <CommmonHeader />
     <Navbar />
-    <MobileMenu />
+    <!-- <MobileMenu /> -->
     <!-- <MobileSidebarMenu /> -->
     <RouterView />
     <CommonFooter />

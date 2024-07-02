@@ -1,132 +1,240 @@
 <template>
   <!-- header -->
-  <header class="py-4 shadow-sm bg-pink-100 lg:bg-white">
-    <div class="container flex items-center justify-between">
+  <header class="lg:py-4 relative z-40">
+    <div class="container hidden lg:flex items-center justify-between">
       <!-- logo -->
-      <RouterLink to="/" class="block w-32">
+      <router-link to="/" class="block w-32">
         <img :src="logo" alt="logo" class="w-full" />
-      </RouterLink>
+      </router-link>
       <!-- logo end -->
 
-      <!-- searchbar -->
-      <div class="w-full xl:max-w-xl lg:max-w-lg lg:flex relative hidden">
-        <span class="absolute left-4 top-3 text-lg text-gray-400">
-          <i class="fas fa-search"></i>
-        </span>
-        <input
-          type="text"
-          class="pl-12 w-full border border-r-0 border-primary py-3 px-3 rounded-l-md focus:ring-primary focus:border-primary"
-          placeholder="search"
-        />
-        <button
-          type="submit"
-          class="bg-primary border border-primary text-white px-8 font-medium rounded-r-md hover:bg-transparent hover:text-primary transition"
-        >
-          Search
-        </button>
-      </div>
-      <!-- searchbar end -->
+      <ul class="flex flex-1 pl-16">
+        <li v-for="(item, index) in menuList" :key="index" class="relative group/1">
+          <router-link
+            :to="item?.url"
+            class="flex items-center gap-2 text-base truncate font-medium p-3 hover:text-primary cursor-pointer"
+          >
+            {{ item?.name }}
+            <span v-if="item?.subChildren">
+              <i class="fa-solid fa-chevron-down w-3"></i>
+            </span>
+          </router-link>
+          <ul
+            v-if="item?.subChildren"
+            class="absolute top-full py-3 bg-white rounded shadow hidden group-hover/1:grid z-10"
+            :class="{
+              'grid-cols-3 w-max': item?.subChildren[0].subChildren
+            }"
+          >
+            <li v-for="(subItem, index) in item?.subChildren" :key="index" class="min-w-36">
+              <router-link
+                :to="subItem?.url"
+                class="w-full text-base truncate block py-1 px-4 cursor-default"
+                :class="{
+                  'hover:text-primary cursor-pointer': subItem?.url
+                }"
+              >
+                {{ subItem?.name }}
+              </router-link>
+              <ul>
+                <li v-for="(subSubItem, index) in subItem?.subChildren" :key="index">
+                  <router-link
+                    :to="subSubItem?.url"
+                    class="w-full text-base truncate block py-1 px-4 hover:text-primary cursor-pointer"
+                    >{{ subSubItem?.name }}</router-link
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-      <!-- navicons -->
-      <div class="space-x-4 flex items-center">
-        <RouterLink to="/wishlist" class="block text-center text-gray-700 hover:text-primary transition relative">
-          <span
-            v-if="user"
-            class="absolute -right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-            >{{ wishlist.getLength }}</span
-          >
-          <div class="text-2xl">
-            <i class="far fa-heart"></i>
-          </div>
-          <div class="text-xs leading-3">Wish List</div>
-        </RouterLink>
-        <RouterLink to="/cart" class="lg:block text-center text-gray-700 hover:text-primary transition hidden relative">
-          <span
-            class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-            >{{ cart.getLength }}</span
-          >
-          <div class="text-2xl">
-            <i class="fas fa-shopping-bag"></i>
-          </div>
-          <div class="text-xs leading-3">Cart</div>
-        </RouterLink>
-        <RouterLink to="/profile" class="block text-center text-gray-700 hover:text-primary transition">
-          <div class="text-2xl">
-            <i class="far fa-user"></i>
-          </div>
-          <div class="text-xs leading-3">Account</div>
-        </RouterLink>
+      <div class="flex items-center gap-4">
+        <div class="text-base font-medium truncate block">
+          <router-link to="/login" class="hover:text-primary cursor-pointer">Login</router-link>
+          <span>/</span>
+          <router-link to="/register" class="hover:text-primary cursor-pointer">Register</router-link>
+        </div>
+        <div class="flex gap-4">
+          <template v-for="select in selectList">
+            <Select
+              class="w-auto"
+              optionStyle=""
+              selectStyle="!border-0 font-medium hover:text-primary group gap-2 transition"
+              iconStyle="group-hover:text-primary transition text-xs w-4"
+              :value="select?.defaultValue"
+              :valueList="select?.valueList"
+            ></Select>
+          </template>
+        </div>
       </div>
-      <!-- navicons end -->
     </div>
+
+    <!-- Header mobile -->
+    <div class="block lg:hidden bg-white">
+      <van-action-bar>
+        <van-action-bar-icon icon="wap-nav" text="Menu" />
+        <van-action-bar-icon icon="bars" text="Categories" @click.stop="handleToggleMenu" />
+        <router-link to="/search">
+          <van-action-bar-icon icon="search" text="Search" />
+        </router-link>
+        <router-link to="/cart">
+          <van-action-bar-icon icon="cart-o" text="Cart" badge="0" />
+        </router-link>
+      </van-action-bar>
+    </div>
+    <!-- Header mobile end -->
+
+    <!-- category menu -->
+    <category-menu
+      :categories="categories"
+      :hidden-desktop="true"
+      :show-menu-mobile="toggleMenu"
+      :on-close-menu="handleCloseMenu"
+    ></category-menu>
+    <!-- category menu end -->
   </header>
   <!-- header end -->
-
-  <!-- mobile menubar -->
-  <div
-    class="fixed w-full border-t border-gray-200 shadow-sm bg-white py-3 bottom-0 left-0 flex justify-around items-start px-6 lg:hidden z-40"
-  >
-    <a href="javascript:void(0)" class="block text-center text-gray-700 hover:text-primary transition relative">
-      <div class="text-2xl" id="menuBar">
-        <i class="fas fa-bars"></i>
-      </div>
-      <div class="text-xs leading-3">Menu</div>
-    </a>
-    <a href="#" class="block text-center text-gray-700 hover:text-primary transition relative">
-      <div class="text-2xl">
-        <i class="fas fa-list-ul"></i>
-      </div>
-      <div class="text-xs leading-3">Category</div>
-    </a>
-    <a href="#" class="block text-center text-gray-700 hover:text-primary transition relative">
-      <div class="text-2xl">
-        <i class="fas fa-search"></i>
-      </div>
-      <div class="text-xs leading-3">Search</div>
-    </a>
-    <a href="cart.html" class="text-center text-gray-700 hover:text-primary transition relative">
-      <span
-        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-        >3</span
-      >
-      <div class="text-2xl">
-        <i class="fas fa-shopping-bag"></i>
-      </div>
-      <div class="text-xs leading-3">Cart</div>
-    </a>
-  </div>
-  <!-- mobile menu end -->
-
-  <!-- mobile sidebar menu -->
-  <div class="fixed left-0 top-0 w-full h-full z-50 bg-black bg-opacity-30 shadow hidden" id="mobileMenu">
-    <div class="absolute left-0 top-0 w-72 h-full z-50 bg-white shadow">
-      <div id="closeMenu" class="text-gray-400 hover:text-primary text-lg absolute right-3 top-3 cursor-pointer">
-        <i class="fas fa-times"></i>
-      </div>
-      <!-- navlink -->
-      <h3 class="text-xl font-semibold text-gray-700 mb-1 font-roboto pl-4 pt-4">Menu</h3>
-      <div class="">
-        <a href="/" class="block px-4 py-2 font-medium transition hover:bg-gray-100"> Home </a>
-        <a href="#" class="block px-4 py-2 font-medium transition hover:bg-gray-100"> Shop </a>
-        <a href="#" class="block px-4 py-2 font-medium transition hover:bg-gray-100"> About Us </a>
-        <roa href="#" class="block px-4 py-2 font-medium transition hover:bg-gray-100"> Contact Us </roa>
-      </div>
-      <!-- navlinks end -->
-    </div>
-  </div>
-  <!-- mobile sidebar menu end -->
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import logo from '@/assets/images/logo.svg'
-import { useWishList } from '@/store/wishlistStore'
-import { useCart } from '@/store/cartStore'
-import { useAuth } from '@/store/authStore'
+import arrowDown from '@/assets/images/icons/arrow-down.svg'
+import categories from '@/faker/home/categories'
+import { ref } from 'vue'
 
-const wishlist = useWishList()
-const cart = useCart()
-const auth = useAuth()
-const authStore = useAuth()
-const user = computed(() => authStore.isAuthenticated)
+interface Item {
+  name: string
+  url: string
+}
+
+interface MenuList extends Item {
+  subChildren?: MenuList[]
+}
+
+const toggleMenu = ref<boolean>(false)
+
+const handleToggleMenu = () => (toggleMenu.value = !toggleMenu.value)
+const handleCloseMenu = () => (toggleMenu.value = false)
+
+const menuList: MenuList[] = [
+  {
+    name: 'Home',
+    url: '/',
+    subChildren: [
+      { name: 'Home page 1', url: '/' },
+      { name: 'Home page 2', url: '/' },
+      { name: 'Home page 3', url: '/' }
+    ]
+  },
+  {
+    name: 'Shop',
+    url: '/shop',
+    subChildren: [
+      { name: 'List view', url: '/list-view' },
+      { name: 'Grid view', url: '/grid-view' },
+      { name: 'Grid view 2', url: '/grid-view-2' },
+      { name: 'Shopping cart', url: '/shopping-cart' },
+      { name: 'Product view', url: '/product-view' }
+    ]
+  },
+  {
+    name: 'Page',
+    url: '/page',
+    subChildren: [
+      {
+        name: 'Others pages',
+        url: '',
+        subChildren: [
+          { name: 'About us', url: '/about-us' },
+          { name: 'Contact us', url: '/contact-us' },
+          { name: 'Track order', url: '/track-order' },
+          { name: 'FAQ', url: '/faq' },
+          { name: '404', url: '/404' }
+        ]
+      },
+      {
+        name: 'Account pages',
+        url: '',
+        subChildren: [
+          { name: 'My Account', url: '/my-account' },
+          { name: 'Login', url: '/login' },
+          { name: 'Register', url: '/register' },
+          { name: 'Forgot password', url: '/forgot-password' }
+        ]
+      },
+      {
+        name: 'Checkout page',
+        url: '',
+        subChildren: [
+          { name: 'Checkout', url: '/checkout' },
+          { name: 'Payment', url: '/payment' },
+          { name: 'Wishlist', url: '/wishlist' },
+          { name: 'Order complete', url: '/order-complete' }
+        ]
+      }
+    ]
+  },
+  { name: 'Contact', url: '/contact' }
+]
+
+const selectList = [
+  {
+    defaultValue: {
+      value: 'language',
+      label: 'Language'
+    },
+    valueList: [
+      {
+        value: 'language',
+        label: 'Language'
+      },
+      {
+        value: 'english',
+        label: 'English'
+      },
+      {
+        value: 'franch',
+        label: 'Franch'
+      }
+    ]
+  },
+  {
+    defaultValue: {
+      value: 'language',
+      label: 'Language'
+    },
+    valueList: [
+      {
+        value: 'currency',
+        label: 'Currency'
+      },
+      {
+        value: 'dollar',
+        label: 'Dollar'
+      },
+      {
+        value: 'euro',
+        label: 'Euro'
+      }
+    ]
+  }
+]
 </script>
+
+<style>
+.van-action-bar {
+  justify-content: space-evenly;
+  padding: 12px 0;
+  border-top: 1px solid #cacaca;
+}
+
+.van-action-bar-icon {
+  font-size: var(--van-padding-sm);
+}
+
+.van-action-bar-icon__icon {
+  font-size: var(--van-padding-lg);
+}
+</style>
