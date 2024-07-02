@@ -2,7 +2,7 @@
   <div
     class="bg-cover bg-center h-[22rem] flex items-center justify-center text-center"
     :style="{
-      backgroundImage: `url(${props.thumbnail})`
+      backgroundImage: `url(${props?.thumbnail})`
     }"
   >
     <div class="max-w-[40rem] px-4">
@@ -25,7 +25,5 @@ interface BackgroundBreadcrumbProps {
     prefixIcon?: VNode
   }[]
 }
-const props = withDefaults(defineProps<BackgroundBreadcrumbProps>(), {
-  breadcrumbs: []
-})
+const props = withDefaults(defineProps<BackgroundBreadcrumbProps>(), {})
 </script>

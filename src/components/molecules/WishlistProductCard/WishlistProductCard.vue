@@ -47,6 +47,7 @@
 </template>
 <script setup lang="ts">
 import RButton from '@/components/atoms/RButton/RButton.vue'
+import Select from '@/components/atoms/Select/Select.vue'
 enum StockStatus {
   InStock = 'in stock',
   OutOfStock = 'out of stock'

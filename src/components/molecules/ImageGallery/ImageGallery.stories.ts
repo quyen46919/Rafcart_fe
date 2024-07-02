@@ -18,7 +18,7 @@ export const Primary: Story = {
     template: '<ImageGallery v-bind="args" />'
   }),
   args: {
-    image_list: [
+    imageList: [
       'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg',
       'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg',
       'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg',
