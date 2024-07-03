@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[345px] flex flex-col border pt-6 px-3">
+  <div class="w-full flex flex-col border pt-6 px-3">
     <div class="text-lg font-bold pb-4 border-b">ORDER SUMMARY</div>
 
     <div class="flex flex-col">
