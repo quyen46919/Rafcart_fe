@@ -4,8 +4,8 @@
       {{ props?.label }}
       <span v-if="props?.asterisk" class="text-primary">*</span>
     </label>
-    <div class="flex relative">
-      <component
+    <div class="flex relative mb-3">
+      <van-field
         id="input"
         v-model="inputValue"
         :is="inputType"
@@ -21,7 +21,8 @@
         }"
         :style="inputStyle"
         @input="handleInput"
-      ></component>
+        :rules="props?.rules"
+      ></van-field>
       <span
         v-if="props?.suffixIcon"
         @click="props?.suffixIconCallback"
@@ -39,13 +40,14 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, VNode, Ref } from 'vue'
-
+import { Form, Field, CellGroup } from 'vant'
+import { FieldRule } from 'vant/es'
 interface InputProps {
   label?: string
   asterisk?: boolean
   placeholder?: string
   value: string | number
-  type: string
+  type: any
   error?: boolean
   helperText?: string
   suffixIcon?: string | VNode
@@ -55,6 +57,7 @@ interface InputProps {
   isMultiline?: boolean
   rows?: number
   maxRow?: number
+  rules?: FieldRule[]
 }
 
 const props = withDefaults(defineProps<InputProps>(), {
@@ -93,3 +96,11 @@ const handleInput = (event: Event) => {
   }
 }
 </script>
+<style>
+.van-cell {
+  overflow: visible;
+}
+.van-field__error-message {
+  margin-top: 6px;
+}
+</style>
