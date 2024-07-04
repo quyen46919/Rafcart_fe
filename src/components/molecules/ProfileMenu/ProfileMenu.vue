@@ -21,7 +21,7 @@
     </div>
 
     <div
-      class="fixed top-0 left-0 bottom-0 transition duration-300 -translate-x-full lg:translate-y-0 opacity-0 lg:opacity-100 invisible lg:visible lg:relative lg:mt-6 bg-white shadow rounded max-w-[300px] w-full lg:w-full p-4 divide-y divide-gray-200 space-y-4 text-gray-600 z-10"
+      class="fixed top-0 left-0 bottom-0 transition duration-300 -translate-x-full lg:translate-x-0 opacity-0 lg:opacity-100 invisible lg:visible lg:relative lg:mt-6 bg-white shadow rounded max-w-[300px] w-full lg:w-full p-4 divide-y divide-gray-200 space-y-4 text-gray-600 z-10"
       :class="{
         '!translate-x-0 !opacity-100 !visible': toggleMenu
       }"
@@ -40,12 +40,7 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div
-        v-for="menuItem in menuList"
-        :key="menuItem.id"
-        class="space-y-1 pl-8"
-        :class="{ 'pt-4': menuItem.id !== 1 }"
-      >
+      <div v-for="menuItem in menuList" :key="menuItem.id" class="space-y-1 pl-8 pt-4">
         <router-link
           :to="menuItem.url"
           class="relative text-gray-800 font-medium capitalize hover:text-primary transition block"
