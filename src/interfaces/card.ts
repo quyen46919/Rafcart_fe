@@ -3,6 +3,7 @@ import SizeProps from './sizes'
 
 interface CardProps {
   id: number
+  slug: string
   name: string
   brand: string
   thumbnail: string

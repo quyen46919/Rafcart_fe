@@ -1,6 +1,6 @@
 <template>
   <!-- header -->
-  <header class="py-4">
+  <header class="lg:py-4 relative z-40">
     <div class="container hidden lg:flex items-center justify-between">
       <!-- logo -->
       <router-link to="/" class="block w-32">
@@ -21,7 +21,7 @@
           </router-link>
           <ul
             v-if="item?.subChildren"
-            class="absolute top-full py-3 rounded shadow hidden group-hover/1:grid"
+            class="absolute top-full py-3 bg-white rounded shadow hidden group-hover/1:grid z-10"
             :class="{
               'grid-cols-3 w-max': item?.subChildren[0].subChildren
             }"
@@ -72,7 +72,7 @@
     </div>
 
     <!-- Header mobile -->
-    <div class="block lg:hidden">
+    <div class="block lg:hidden bg-white">
       <van-action-bar>
         <van-action-bar-icon icon="wap-nav" text="Menu" />
         <van-action-bar-icon icon="bars" text="Categories" @click.stop="handleToggleMenu" />
@@ -226,6 +226,8 @@ const selectList = [
 <style>
 .van-action-bar {
   justify-content: space-evenly;
+  padding: 12px 0;
+  border-top: 1px solid #cacaca;
 }
 
 .van-action-bar-icon {

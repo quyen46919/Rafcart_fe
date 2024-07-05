@@ -7,3 +7,9 @@ export const formattedDate = (expiresDate: string) => {
   return formattedDate
 }
 
+export const formatPrice = (number: number) => {
+  return number.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
+}
