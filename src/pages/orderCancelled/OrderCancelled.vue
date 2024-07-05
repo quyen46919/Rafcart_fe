@@ -1,34 +1,45 @@
 <template>
-  <!-- breadcrum -->
-  <div class="py-4 container flex gap-3 items-center">
-    <router-link :to="{ name: 'home' }" class="text-primary text-base">
-      <i class="fas fa-home"></i>
-    </router-link>
-    <span class="text-sm text-gray-400"><i class="fas fa-chevron-right"></i></span>
-    <p class="text-gray-600 font-medium uppercase">Shopping Cart</p>
+  <div
+    class="container flex flex-row items-center justify-start w-1/3 msm:container msm:w-full sm:w-[100%] md:w-full lg:w-full py-4 p-6 gap-3"
+  >
+    <Breadcrumb :breadcrumbs="breadcrumbList" class="flex items-start !justify-start" />
   </div>
-  <!-- breadcrum end -->
-
-  <!-- order complete wrapper -->
-  <div class="max-w-3xl mx-auto px-4 pt-16 pb-24 text-center">
-    <h2 class="text-4xl font-bold text-primary mb-2">YOUR ORDER IS CANCELLED!</h2>
-    <p class="text-gray-600">We're sorry to see that you have canceled your payment.</p>
-    <p class="text-gray-600">
-      If you need any assistance or have questions about your order, please don't hesitate to contact our support team.
-      We're here to help!
-    </p>
-    <div class="mt-10">
-      <RouterLink
-        to="checkout"
-        class="bg-primary border border-primary text-white px-6 py-3 font-medium rounded-md uppercase hover:bg-transparent hover:text-primary transition text-center"
-      >
-        Back to checkout
-      </RouterLink>
+  <div
+    class="container flex flex-col items-center justify-start md:justify-start lg:items-start lg:flex-row msm:items-center sm:items-start lg:justify-around py-3 gap-3"
+  >
+    <ProfileMenu :username="user.userName" :avatar="user.avatar" />
+    <div class="msm:w-full">
+      <OrderCancelCard v-for="(item, index) in orderCancels" :key="index" v-bind="item" />
     </div>
   </div>
-  <!-- order complete wrapper end -->
 </template>
 
 <script setup lang="ts">
+import { ref, h } from 'vue'
 import completed from '@/assets/images/complete.png'
+import Avatar from '@/assets/images/avatar.png'
+import Breadcrumb from '@/components/atoms/Breadcrumb/Breadcrumb.vue'
+import ProfileMenu from '@/components/molecules/ProfileMenu/ProfileMenu.vue'
+import OrderCancelCard from '@/components/molecules/OrderHistoryCard/OrderHistoryCard.vue'
+import user from '@/faker/auth/user.ts'
+import { OrderStatus, OrderStatusColors } from '@/interfaces/order.ts'
+import orderCancels from '@/faker/order/cancelledOrders.ts'
+import ROUTES from '@/router/domain-routes'
+
+const PrefixIcon = (props: { class: string }) => h('i', { class: props.class }, [])
+
+const breadcrumbList = ref([
+  {
+    url: '/',
+    prefixIcon: h(PrefixIcon, { class: 'fas fa-home mr-2' })
+  },
+  {
+    url: '/profile',
+    label: 'My Account'
+  },
+  {
+    url: '/order-cancelled',
+    label: 'Order Cancel'
+  }
+])
 </script>

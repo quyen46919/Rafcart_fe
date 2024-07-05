@@ -1,9 +1,7 @@
 <template>
-  <!-- navbar -->
   <nav class="bg-gray-800 lg:block">
     <div class="container">
-      <div class="flex">
-        <!-- all category -->
+      <div class="flex flex-col sm:flex-row">
         <div class="px-8 py-4 bg-primary flex items-center cursor-pointer group relative">
           <span class="text-white">
             <i class="fas fa-bars"></i>
@@ -13,7 +11,6 @@
           <div
             class="absolute left-0 top-full w-full bg-white shadow-md py-3 invisible opacity-0 group-hover:opacity-100 group-hover:visible transition duration-300 z-50 divide-y divide-gray-300 divide-dashed"
           >
-            <!-- single category -->
             <RouterLink
               class="px-6 py-3 flex items-center hover:bg-gray-100 transition"
               v-for="link in linkList"
@@ -23,16 +20,11 @@
               <img :src="link.image" class="w-5 h-5 object-contain" />
               <span class="ml-6 text-gray-600 text-sm">{{ link.name }}</span>
             </RouterLink>
-            <!-- single category end -->
           </div>
         </div>
-        <!-- all category end -->
-
-        <!-- nav menu -->
         <div class="flex items-center justify-between flex-grow pl-12">
           <div class="flex items-center space-x-6 text-base capitalize">
             <RouterLink to="/" class="text-gray-200 hover:text-white transition">Home</RouterLink>
-            <!-- <RouterLink to="/filter" class="text-gray-200 hover:text-white transition">Filter</RouterLink> -->
             <RouterLink to="/about-us" class="text-gray-200 hover:text-white transition">About us</RouterLink>
             <RouterLink to="/contact-us" class="text-gray-200 hover:text-white transition">Contact us</RouterLink>
           </div>
@@ -51,11 +43,9 @@
             Logout
           </div>
         </div>
-        <!-- nav menu end -->
       </div>
     </div>
   </nav>
-  <!-- navbar end -->
 </template>
 
 <script setup lang="ts">
