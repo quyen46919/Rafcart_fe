@@ -42,9 +42,10 @@
       </div>
       <div v-for="menuItem in menuList" :key="menuItem.id" class="space-y-1 pl-8 pt-4">
         <router-link
+          activeClass="text-primary"
+          exactActiveClass="text-primary"
           :to="menuItem.url"
-          class="relative text-gray-800 font-medium capitalize hover:text-primary transition block"
-          style="cursor: pointer"
+          class="relative text-gray-800 font-medium capitalize hover:text-primary transition block cursor-pointer"
         >
           {{ menuItem.label }}
           <span class="absolute -left-8 top-0 text-base">
@@ -53,9 +54,10 @@
         </router-link>
         <div v-for="subItem in menuItem.subItems" :key="subItem.url">
           <router-link
+            activeClass="text-primary"
+            exactActiveClass="text-primary"
             :to="subItem.url"
-            class="hover:text-primary transition capitalize block"
-            style="cursor: pointer"
+            class="hover:text-primary transition capitalize block cursor-pointer"
             >{{ subItem.label }}</router-link
           >
         </div>
@@ -103,7 +105,7 @@ const menuList = [
     label: 'My order history',
     icon: 'fas fa-gift',
     subItems: [
-      { url: ROUTES.ORDER_CANCELLED, label: 'My returns' },
+      { url: ROUTES.ORDER_COMPLETED, label: 'My returns' },
       { url: ROUTES.ORDER_CANCELLED, label: 'My cancellations' },
       { url: ROUTES.ORDER_COMPLETED, label: 'My reviews' }
     ]
