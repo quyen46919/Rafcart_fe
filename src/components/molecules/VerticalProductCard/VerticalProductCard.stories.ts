@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
-import product from '@/faker/productDetail/product'
 import VerticalProductCard from './VerticalProductCard.vue'
 
 const meta: Meta<typeof VerticalProductCard> = {
@@ -28,7 +27,7 @@ export const Primary: Story = {
     comments: [
       {
         id: 1,
-        parent_id: null,
+        parent_id: 1,
         comment: 'ADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofaADELINE sofa',
         rating: 4,
         updated_at: 'tody'

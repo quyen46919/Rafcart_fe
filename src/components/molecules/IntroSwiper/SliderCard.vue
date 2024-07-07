@@ -31,13 +31,9 @@
 import { defineProps } from 'vue'
 import RButton from '@/components/atoms/RButton/RButton.vue'
 import { useRouter } from 'vue-router'
-interface SliderCradProps {
-  banner: string
-  title: string
-  text: string
-}
+import { SliderCardProps } from '@/interfaces'
 
-const props = defineProps<SliderCradProps>()
+const props = defineProps<SliderCardProps>()
 const router = useRouter()
 
 const navigateToFilter = () => {

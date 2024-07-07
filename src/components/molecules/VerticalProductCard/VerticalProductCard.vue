@@ -1,6 +1,6 @@
 <template>
-  <div class="w-fit max-w-[272px] group flex flex-col justify-start items-start shadow-md rounded-md overflow-hidden">
-    <div class="relative w-[272px] h-[202px] overflow-hidden cursor-pointer">
+  <div class="w-full min-w-[272px] group flex flex-col justify-start items-start shadow-md rounded-md overflow-hidden">
+    <div class="relative w-full h-auto min-w-[272px] min-h-[202px] overflow-hidden cursor-pointer">
       <img class="absolute z-0 w-full h-full top-0 left-0 rounded-t-md" :src="props.thumbnail" :alt="props.name" />
       <div
         :class="[
@@ -16,11 +16,11 @@
           {{ props.tag }}
         </div>
         <div
-          v-else-if="props.tag && typeof props.tag !== 'string' && props.tag > 0"
+          v-else-if="props.tag && typeof props.tag === 'number' && props.tag > 0"
           :class="[
             'flex justify-center items-center w-[45px] h-8  text-white rounded-sm',
-            { 'bg-green-600': props.tag > 0 && props.tag < 45 },
-            { 'bg-orange-300': props.tag > 45 }
+            { 'bg-green-600': typeof props.tag === 'number' && props.tag > 0 && props.tag < 45 },
+            { 'bg-orange-300': typeof props.tag === 'number' && props.tag > 45 }
           ]"
         >
           {{ tagPercent }}%
@@ -69,23 +69,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
 import RButton from '@/components/atoms/RButton/RButton.vue'
 import Rating from '@/components/atoms/Rating/Rating.vue'
-import CardProps from '@/interfaces/card'
-import { CardTag } from '@/shared/enum/order'
-
-interface VerticalProductCardProp extends CardProps {
-  tag?: number | TagStatus
-  isWishlist?: boolean
-  href: string
-  onAddToCart: () => void
-  onViewDetail: () => void
-  onWishlist: () => void
-}
+import { VerticalProductCardProp } from '@/interfaces'
+import { computed } from 'vue'
 const props = withDefaults(defineProps<VerticalProductCardProp>(), {})
-
-const tagPercent = computed(() => (props.tag && typeof props.tag !== 'string' && props.tag > 100 ? 100 : props.tag))
+const tagPercent = computed(() => (props.tag && typeof props.tag === 'number' && props.tag > 100 ? 100 : props.tag))
 const wishlistStatus = computed(() => props.isWishlist)
 
 const averageRating = computed(() => {

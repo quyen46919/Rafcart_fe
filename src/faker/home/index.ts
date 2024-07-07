@@ -1,0 +1,6 @@
+export * from './offerProduct'
+export * from './recommended_for_you'
+export * from './saleOff'
+export * from './new_arrival'
+export * from './serviceCard'
+export * from './introSwiper'

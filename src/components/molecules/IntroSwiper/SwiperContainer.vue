@@ -25,15 +25,10 @@ import 'swiper/css/autoplay'
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
 import SliderCard from './SliderCard.vue'
 import { computed } from 'vue'
-
-interface Slide {
-  banner: string
-  title: string
-  text: string
-}
+import { SliderCardProps } from '@/interfaces'
 
 interface SwiperContainerProps {
-  slides: Slide[]
+  slides: SliderCardProps[]
 }
 
 const props = defineProps<SwiperContainerProps>()
@@ -42,3 +37,15 @@ const modules = [Pagination, Navigation, Autoplay]
 // limit 10 slide
 const limitedSlides = computed(() => props.slides.slice(0, 10))
 </script>
+<style scoped>
+::v-deep .swiper-button-prev:after,
+::v-deep .swiper-button-next:after {
+  font-family: swiper-icons;
+  font-size: large !important;
+  text-transform: none !important;
+  letter-spacing: 0;
+  font-variant: initial;
+  color: #312b2b !important;
+  line-height: 1;
+}
+</style>

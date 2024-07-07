@@ -11,13 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import { ServiceCardProps } from '@/interfaces'
 import { defineProps, withDefaults } from 'vue'
-
-interface ServiceCardProps {
-  image: string
-  title: string
-  description: string
-}
 
 const props = withDefaults(defineProps<ServiceCardProps>(), {
   image: '',
