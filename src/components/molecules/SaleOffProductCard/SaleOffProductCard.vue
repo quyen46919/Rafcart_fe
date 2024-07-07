@@ -34,21 +34,11 @@
 </template>
 
 <script setup lang="ts">
+import { SaleOffProductCardProps } from '@/interfaces'
 import { withDefaults } from 'vue'
-import type { VNode } from 'vue'
-
-interface SaleOffProductCardProps {
-  offer: string
-  label: string
-  subLabel: string
-  imageUrl: string
-  alt: string
-  imageInText: string
-}
 
 const props = withDefaults(defineProps<SaleOffProductCardProps>(), {})
 </script>
-
 <style>
 .text-style {
   -webkit-background-clip: text;

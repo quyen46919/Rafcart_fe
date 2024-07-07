@@ -1,8 +1,8 @@
 <template>
   <nav class="bg-gray-800 lg:block">
-    <div class="container">
+    <div class="container !max-w-full sm:w-auto">
       <div class="flex flex-col sm:flex-row">
-        <div class="px-8 py-4 bg-primary flex items-center cursor-pointer group relative">
+        <div class="px-8 py-4 bg-primary hidden lg:flex items-center cursor-pointer group relative">
           <span class="text-white">
             <i class="fas fa-bars"></i>
           </span>
@@ -22,8 +22,8 @@
             </RouterLink>
           </div>
         </div>
-        <div class="flex items-center justify-between flex-grow pl-12">
-          <div class="flex items-center space-x-6 text-base capitalize">
+        <div class="py-4 lg:py-0 pl-0 lg:pl-12 flex items-center justify-between flex-grow">
+          <div class="flex items-center space-x-3 sm:space-x-6 text-base capitalize">
             <RouterLink to="/" class="text-gray-200 hover:text-white transition">Home</RouterLink>
             <RouterLink to="/about-us" class="text-gray-200 hover:text-white transition">About us</RouterLink>
             <RouterLink to="/contact-us" class="text-gray-200 hover:text-white transition">Contact us</RouterLink>

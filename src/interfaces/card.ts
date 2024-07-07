@@ -1,4 +1,4 @@
-import CategoryProps from './category'
+import { CategoryProps } from './category'
 import SizeProps from './sizes'
 
 interface CardProps {
