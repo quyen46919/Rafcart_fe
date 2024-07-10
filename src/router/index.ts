@@ -15,6 +15,7 @@ import Account from '@/pages/profile/Account.vue'
 import Filter from '@/pages/filter/Filter.vue'
 import PageNotFound from '@/pages/pageNotFound/PageNotFound.vue'
 import Faq from '@/pages/faq/Faq.vue'
+import ContactUs from '@/pages/contactUs/ContactUs.vue'
 import { isEmpty } from 'lodash'
 import ROUTES from './domain-routes'
 
@@ -65,6 +66,11 @@ const router = createRouter({
       path: ROUTES.ORDER_CANCELLED,
       name: 'order-cancelled',
       component: OrderCancelled
+    },
+    {
+      path: ROUTES.CONTACT_US,
+      name: 'contact-us',
+      component: ContactUs
     },
     {
       path: ROUTES.PROFILE,

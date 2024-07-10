@@ -14,6 +14,8 @@
         :placeholder="props?.placeholder"
         :rows="props?.rows"
         :disabled="props?.isDisabled"
+        v-bind="$attrs"
+        v-on="$listeners"
         class="border border-gray-300 rounded p-4 pr-12 w-full shadow-none focus:border-primary focus:ring-primary resize-none"
         :class="{
           'text-primary border-primary': props?.error,
