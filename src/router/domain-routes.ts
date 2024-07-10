@@ -14,7 +14,7 @@ const ROUTES = {
   ACCOUNT: '/account',
   FILTER: '/filter',
   FAQ: '/faq',
-  PAGE_NOT_FOUND: '/:pathMatch(.*)*'
+  CONTACT_US: '/contact-us',
+  PAGE_NOT_FOUND: '/:pathMatch(.*)*',
 }
-
 export default ROUTES
